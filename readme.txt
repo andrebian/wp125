@@ -5,7 +5,7 @@ Author URI: http://www.webmaster-source.com
 Donate link: http://www.webmaster-source.com/donate/
 Tags: ads, 125x125, management, advertisement
 Requires at least: 2.3
-Tested up to: 2.5
+Tested up to: 2.6
 Stable tag: 1.0.0
 
 
