@@ -1,22 +1,13 @@
 <?php
 //***** Installer *****
-function wp125_install () {
 require_once(ABSPATH . 'wp-admin/upgrade.php');
 //***Installer variables***
 global $wpdb;
-$table_name = $wpdb->prefix . "wp125_settings";
-$table2_name = $wpdb->prefix . "wp125_ads";
-$wp125_db_version = "0.8";
+$table_name = $wpdb->prefix . "wp125_ads";
+$wp125_db_version = "1.33667";
 //***Installer***
 if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
 $sql = "CREATE TABLE " . $table_name . " (
-	  ad_orientation varchar(3) NOT NULL,
-	  num_slots int(3) NOT NULL,
-	  ad_order varchar(8) NOT NULL,
-	  buyad_url text NOT NULL
-	);";
-dbDelta($sql);
-$sql = "CREATE TABLE " . $table2_name . " (
 	  id int(12) NOT NULL auto_increment,
 	  slot int(2) NOT NULL,
 	  name text NOT NULL,
@@ -30,25 +21,24 @@ $sql = "CREATE TABLE " . $table2_name . " (
 	);";
 dbDelta($sql);
 
-$def_adorient = "2c";
-$def_num_slots = 6;
-$def_ad_order = "normal";
-$def_buyad_url = '';
-$insert = "INSERT INTO " . $table_name . " (ad_orientation, num_slots, ad_order, buyad_url) " . "VALUES ('" . $wpdb->escape($def_adorient) . "','" . $wpdb->escape($def_num_slots) .  "','" . $wpdb->escape($def_ad_order) .  "','" . $wpdb->escape($def_buyad_url) ."')";
-$results = $wpdb->query( $insert );
+add_option("wp125_ad_orientation", "2c");
+add_option("wp125_num_slots", "6");
+add_option("wp125_ad_order", "normal");
+add_option("wp125_buyad_url", "");
+add_option("wp125_disable_default_style", "");
+add_option("wp125_widget_title", "Ads");
+add_option("wp125_dofollow", "");
+add_option("wp125_emailonexp", "");
+add_option("wp125_defaultad", wp125_get_plugin_dir('url')."/youradhere.jpg");
+
 add_option("wp125_db_version", $wp125_db_version);
 }
+
 //***Upgrader***
 $installed_ver = get_option( "wp125_db_version" );
 if( $installed_ver != $wp125_db_version ) {
-$sql = "CREATE TABLE " . $table_name . " (
-	  ad_orientation varchar(3) NOT NULL,
-	  num_slots int(3) NOT NULL,
-	  ad_order varchar(8) NOT NULL,
-	  buyad_url text NOT NULL
-	);";
 dbDelta($sql);
-$sql = "CREATE TABLE " . $table2_name . " (
+$sql = "CREATE TABLE " . $table_name . " (
 	  id int(12) NOT NULL auto_increment,
 	  slot int(2) NOT NULL,
 	  name text NOT NULL,
@@ -61,8 +51,16 @@ $sql = "CREATE TABLE " . $table2_name . " (
 	  PRIMARY KEY  (id)
 	);";
 dbDelta($sql);
+add_option("wp125_ad_orientation", "2c");
+add_option("wp125_num_slots", "6");
+add_option("wp125_ad_order", "normal");
+add_option("wp125_buyad_url", "");
+add_option("wp125_disable_default_style", "");
+add_option("wp125_widget_title", "Ads");
+add_option("wp125_dofollow", "");
+add_option("wp125_emailonexp", "");
+add_option("wp125_defaultad", wp125_get_plugin_dir('url')."/youradhere.jpg");
 update_option( "wp125_db_version", $wp125_db_version );
-}
 }
 //***** End Installer *****
 ?>

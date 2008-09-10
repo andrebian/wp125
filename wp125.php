@@ -1,18 +1,18 @@
 <?php
 /*
 Plugin Name: WP125
-Plugin URI: http://www.webmaster-source.com/wordpress-plugins/
+Plugin URI: http://www.webmaster-source.com/wp125-ad-plugin-wordpress/
 Description: Easily manage 125x125 ads within your WordPress Dashboard.
 Author: Matt Harzewski (redwall_hp)
 Author URI: http://www.webmaster-source.com
-Version: 1.0.0
+Version: 1.1.0
 */
 
 
 //Ad Click Redirect
 add_action('init', 'wp125_adclick');
 function wp125_adclick() {
-if ($_GET['adclick'] != "") {
+if ($_GET['adclick'] != "" && ctype_digit($_GET['adclick'])) {
 $theid = $_GET['adclick'];
 global $wpdb;
 $adtable_name = $wpdb->prefix . "wp125_ads";
@@ -25,8 +25,19 @@ exit;
 }
 
 
+//Stylesheet
+function wp125_stylesheet() {
+if (get_option("wp125_disable_default_style")=='') {
+echo '<link rel="stylesheet" href="'.wp125_get_plugin_dir('url').'/wp125.css" type="text/css" media="screen" />'."\n";
+} else { return; }
+}
+add_action('wp_print_scripts', 'wp125_stylesheet');
+
+
 //Installer
+function wp125_install () {
 require_once(dirname(__FILE__).'/installer.php');
+}
 register_activation_hook(__FILE__,'wp125_install');
 
 
@@ -37,14 +48,18 @@ register_sidebar_widget(__('WP125'), 'wp125_write_ads_widget');
 function wp125_write_ads_widget($args) {
 extract($args);
 echo $before_widget;
-echo $before_title;?>Ads<?php echo $after_title;
+if (get_option("wp125_widget_title")!='') {
+echo $before_title; echo get_option("wp125_widget_title"); echo $after_title;
+}
 wp125_write_ads();
 echo $after_widget;
 }
 
 
 
+
 //Add the Admin Menus
+if (is_admin()) {
 function wp125_add_admin_menu() {
 add_menu_page("125x125 Ads", "Ads", "edit_themes", __FILE__, "wp125_write_managemenu");
 add_submenu_page(__FILE__, "Manage 125x125 Ads", "Manage", "edit_themes", __FILE__, "wp125_write_managemenu");
@@ -52,9 +67,9 @@ add_submenu_page(__FILE__, "Add/Edit 125x125 Ads", "Add/Edit", "edit_themes", 'w
 add_submenu_page(__FILE__, "125x125 Ad Settings", "Settings", "edit_themes", 'wp125_settings', "wp125_write_settingsmenu");
 }
 
-
 //Include menus
 require_once(dirname(__FILE__).'/adminmenus.php');
+}
 
 
 
@@ -68,6 +83,7 @@ $thedate = strtotime($thedate);
 if ($today > $thedate) {
 $updatedb = "UPDATE $adtable_name SET status='0' WHERE id='$theid'";
 $results = $wpdb->query($updatedb);
+sendExpirationEmail($theid);
 } else { return; }
 } else { return; }
 }
@@ -77,16 +93,19 @@ $results = $wpdb->query($updatedb);
 //Write the Ads
 function wp125_write_ads() {
 global $wpdb;
+$setting_ad_orientation = get_option("wp125_ad_orientation");
+$setting_num_slots = get_option("wp125_num_slots");
+$setting_ad_order = get_option("wp125_ad_order");
+$setting_buyad_url = get_option("wp125_buyad_url");
+$setting_defaultad = get_option("wp125_defaultad");
 $adtable_name = $wpdb->prefix . "wp125_ads";
-$settingtable_name = $wpdb->prefix . "wp125_settings";
-$thesettings = $wpdb->get_row("SELECT * FROM $settingtable_name WHERE ad_orientation != '' ", OBJECT);
-if ($thesettings->ad_order == 'random') { $theorder = 'RAND() LIMIT '.$thesettings->num_slots; } else { $theorder = 'slot ASC'; }
+if ($setting_ad_order == 'random') { $theorder = 'RAND() LIMIT '.$setting_num_slots; } else { $theorder = 'slot ASC'; }
 $theads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status = '1' ORDER BY $theorder", OBJECT);
 if ($theads) {
-if ($thesettings->ad_orientation=='1c') {
-echo '<div id="1c125adwrap" style="width:100%;">';
+if ($setting_ad_orientation=='1c') {
+echo '<div id="wp125adwrap_1c">';
 foreach ($theads as $thead){
-echo '<div class="125ad" style="margin-bottom:10px;">';
+echo '<div class="wp125ad">';
 wp125_CheckAdDate($thead->end_date, $thead->id);
 if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
 echo '<a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a>';
@@ -94,16 +113,16 @@ echo '</div>';
 }
 echo '</div>';
 }
-if ($thesettings->ad_orientation=='2c') {
-echo '<div id="2c125adwrap" style="width:100%;">';
+if ($setting_ad_orientation=='2c') {
+echo '<div id="wp125adwrap_2c">';
 foreach ($theads as $thead){
 wp125_CheckAdDate($thead->end_date, $thead->id);
 if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
-echo '<div class="125ad" style="width:125px; float:left; padding:10px;"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a></div>';
+echo '<div class="wp125ad"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a></div>';
 }
 echo '</div>';
 }
-if ($thesettings->buyad_url!='') { echo '<div style="padding:10px; clear:both;"><a href="'.$thesettings->buyad_url.'">Your ad here.</a></div>'; }
+if ($setting_buyad_url!='') { echo '<div id="wp125_buyadlink"><a href="'.$setting_buyad_url.'">Your ad here.</a></div>'; }
 }
 }
 
@@ -116,7 +135,34 @@ if ($thead) {
 wp125_CheckAdDate($thead->end_date, $thead->id);
 if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
 echo '<a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a>';
+} else { echo '<a href="'.get_option("wp125_buyad_url").'" rel="nofollow"><img src="'.get_option("wp125_defaultad").'" alt="Your Ad Here" /></a>'; }
 }
+
+
+//Return path to plugin directory (url/path)
+function wp125_get_plugin_dir($type) {
+if ( !defined('WP_CONTENT_URL') )
+define( 'WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
+if ( !defined('WP_CONTENT_DIR') )
+define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
+if ($type=='path') { return WP_CONTENT_DIR.'/plugins/'.plugin_basename(dirname(__FILE__)); }
+else { return WP_CONTENT_URL.'/plugins/'.plugin_basename(dirname(__FILE__)); }
+}
+
+
+//Send email alert to admin when an ad expires
+function sendExpirationEmail($theid) {
+global $wpdb;
+$adtable_name = $wpdb->prefix . "wp125_ads";
+$thead = $wpdb->get_row("SELECT * FROM $adtable_name WHERE id='$theid'", OBJECT);
+if (get_option('wp125_emailonexp')!='') {
+$theblog = get_option('blogname');
+$from = get_option('admin_email');
+$message = "One of the advertisements on $theblog has expired.\n\nAD NAME: ".$thead->name."\nAD URL: ".$thead->target."\nSTART DATE: ".$thead->start_date."\nEND DATE: ".$thead->end_date."\n\nFor more information, and to manage your ads, please log in to your WordPress administration.\n\n\n*** Powered by WordPress and WP125 ***";
+$headers = "From: $from\r\nReply-To: $from";
+$mail_sent = @mail(get_option('wp125_emailonexp'), "An ad on your blog has expired", $message, $headers);
+}
+return;
 }
 
 

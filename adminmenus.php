@@ -74,8 +74,9 @@ echo '</tr>';
 } else { echo '<tr> <td colspan="8">No ads found.</td> </tr>'; }
 
 echo '</tbody>
-</table>
-</div>';
+</table>';
+wp125_admin_page_footer();
+echo '</div>';
 }
 
 function wp125_write_addeditmenu() {
@@ -211,25 +212,43 @@ document.getElementById("adexp-date").style.display = "none";
 </table>
 <p class="submit"><input type="submit" name="Submit" value="Save Ad" /> &nbsp; <?php if ($_GET['editad']!='') { ?><input type="submit" name="deletead" value="Delete Ad" /><?php } ?></p>
 </form>
+<?php wp125_admin_page_footer(); ?>
 </div><?php
 }
 
 function wp125_write_settingsmenu() {
 //DB Data
 global $wpdb;
-$settingtable_name = $wpdb->prefix . "wp125_settings";
 //Add settings, if submitted
 if ($_POST['issubmitted']=='yes') {
 $post_adorient = $wpdb->escape($_POST['adorient']);
 $post_numslots = $wpdb->escape($_POST['numads']);
 $post_adorder = $wpdb->escape($_POST['adorder']);
 $post_salespage = $wpdb->escape($_POST['salespage']);
-$updatedb = "UPDATE $settingtable_name SET ad_orientation='$post_adorient', num_slots='$post_numslots', ad_order='$post_adorder', buyad_url='$post_salespage' WHERE ad_orientation != ''";
-$results = $wpdb->query($updatedb);
+$post_widgettitle = $wpdb->escape($_POST['widgettitle']);
+$post_defaultstyle = $wpdb->escape($_POST['defaultstyle']);
+$post_emailonexp = $wpdb->escape($_POST['emailonexp']);
+$post_defaultad = $wpdb->escape($_POST['defaultad']);
+if ($post_defaultstyle!='on') { $post_defaultstyle = 'yes'; } else { $post_defaultstyle = ''; }
+update_option("wp125_ad_orientation", $post_adorient);
+update_option("wp125_num_slots", $post_numslots);
+update_option("wp125_ad_order", $post_adorder);
+update_option("wp125_buyad_url", $post_salespage);
+update_option("wp125_widget_title", $post_widgettitle);
+update_option("wp125_disable_default_style", $post_defaultstyle);
+update_option("wp125_emailonexp", $post_emailonexp);
+update_option("wp125_defaultad", $post_defaultad);
 echo '<div id="message" class="updated fade"><p>Settings updated.</p></div>';
 }
-// Retrieve settings
-$wp125settings = $wpdb->get_row("SELECT * FROM $settingtable_name WHERE ad_orientation != '' ", OBJECT);
+//Retrieve settings
+$setting_ad_orientation = get_option("wp125_ad_orientation");
+$setting_num_slots = get_option("wp125_num_slots");
+$setting_ad_order = get_option("wp125_ad_order");
+$setting_buyad_url = get_option("wp125_buyad_url");
+$setting_widget_title = get_option("wp125_widget_title");
+$setting_disable_default_style = get_option("wp125_disable_default_style");
+$setting_emailonexp = get_option("wp125_emailonexp");
+$setting_defaultad = get_option("wp125_defaultad");
 ?><div class="wrap">
 <h2>Settings</h2>
 <form method="post" action="admin.php?page=wp125_settings">
@@ -239,29 +258,49 @@ $wp125settings = $wpdb->get_row("SELECT * FROM $settingtable_name WHERE ad_orien
 <th scope="row">Ad Orientation</th>
 <td><label for="adorient">
 <select name="adorient" id="adorient">
-<option <?php if ($wp125settings->ad_orientation=='1c') { echo 'selected="selected"'; } ?> value="1c">One Column</option>
-<option <?php if ($wp125settings->ad_orientation=='2c') { echo 'selected="selected"'; } ?> value="2c">Two Column</option>
+<option <?php if ($setting_ad_orientation=='1c') { echo 'selected="selected"'; } ?> value="1c">One Column</option>
+<option <?php if ($setting_ad_orientation=='2c') { echo 'selected="selected"'; } ?> value="2c">Two Column</option>
 </select></label>
 <br/>How many columns should the ads be displayed in?
 </td></tr>
 
 <tr valign="top">
 <th scope="row">Number of Ad Slots</th>
-<td><input name="numads" type="text" id="numads" value="<?php echo $wp125settings->num_slots; ?>" size="2" /><br/>How many ads should be shown?</td>
+<td><input name="numads" type="text" id="numads" value="<?php echo $setting_num_slots; ?>" size="2" /><br/>How many ads should be shown?</td>
 </tr>
 
 <tr valign="top">
 <th scope="row">Ad Order</th>
 <td><label for="adorder">
 <select name="adorder" id="adorder">
-<option selected="selected" value="normal" <?php if ($wp125settings->ad_order=='normal') { echo 'selected="selected"'; } ?>>Normal</option>
-<option value="random" <?php if ($wp125settings->ad_order=='random') { echo 'selected="selected"'; } ?>>Random</option>
+<option selected="selected" value="normal" <?php if ($setting_ad_order=='normal') { echo 'selected="selected"'; } ?>>Normal</option>
+<option value="random" <?php if ($setting_ad_order=='random') { echo 'selected="selected"'; } ?>>Random</option>
 </select></label>
 </td></tr>
 
 <tr valign="top">
+<th scope="row">Widget Title</th>
+<td><input name="widgettitle" type="text" id="widgettitle" value="<?php echo $setting_widget_title; ?>" size="50" /><br/>The title to be displayed in the widget. (Leave blank to disable)</td>
+</tr>
+
+<tr valign="top">
 <th scope="row">Ad Sales Page</th>
-<td><input name="salespage" type="text" id="salespage" value="<?php echo $wp125settings->buyad_url; ?>" size="50" /><br/>Do you have a page with statistics and prices? (Leave blank to disable)</td>
+<td><input name="salespage" type="text" id="salespage" value="<?php echo $setting_buyad_url; ?>" size="50" /><br/>Do you have a page with statistics and prices? (Leave blank to disable)</td>
+</tr>
+
+<tr valign="top">
+<th scope="row">Default Style</th>
+<td><input type="checkbox" name="defaultstyle" <?php if ($setting_disable_default_style=='') { echo 'checked="checked"'; } ?> /> Include default ad stylesheet? <br/>Leave checked unless you want to use your own CSS to style the ads. Refer to the documentation for further help.</td>
+</tr>
+
+<tr valign="top">
+<th scope="row">Expiration Email</th>
+<td><input name="emailonexp" type="text" id="emailonexp" value="<?php echo $setting_emailonexp; ?>" size="50" /><br/>Enter your email address if you would like to be emailed when an ad expires. (Leave blank to disable)</td>
+</tr>
+
+<tr valign="top">
+<th scope="row">Default Ad</th>
+<td><input name="defaultad" type="text" id="defaultad" value="<?php echo $setting_defaultad; ?>" size="50" /><br/>Which image should be shown as a placeholder when an ad slot is empty? (<a href="<?php echo wp125_get_plugin_dir('url').'/youradhere.jpg'; ?>">Default</a>)</td>
 </tr>
 
 </table>
@@ -270,8 +309,17 @@ $wp125settings = $wpdb->get_row("SELECT * FROM $settingtable_name WHERE ad_orien
 </form>
 <br/>
 <p>Your ads can be displayed using either the included widget, or by using the <strong>&lt;?php wp125_write_ads();  ?&gt;</strong> template tag. Also, you can display a single ad, without any formatting, using <strong>&lt;?php wp125_single_ad(<em>num</em>);  ?&gt;</strong>, where <em>num</em> is the number of the ad slot you wish to show. This is useful for cases where your theme prevents the default formatting from working properly, or where you wish to display your ads in an unforeseen manner.</p>
+<?php wp125_admin_page_footer(); ?>
 </div><?php
 }
 
+
+
+function wp125_admin_page_footer() {
+echo '<div style="margin-top:45px; font-size:0.87em;">';
+echo '<div style="float:right;"><a href="http://www.webmaster-source.com/donate/" title="Why should you donate $5? Click to find out..."><img src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" alt="Donate" /></a></div>';
+echo '<div><a href="'.wp125_get_plugin_dir('url').'/readme.txt">Documentation</a> | <a href="http://www.webmaster-source.com/wp125-ad-plugin-wordpress/">WP125 Homepage</a></div>';
+echo '</div>';
+}
 
 ?>
