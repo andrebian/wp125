@@ -104,21 +104,29 @@ $theads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status = '1' ORD
 if ($theads) {
 if ($setting_ad_orientation=='1c') {
 echo '<div id="wp125adwrap_1c">';
+$ads_shown = 0;
 foreach ($theads as $thead){
-echo '<div class="wp125ad">';
 wp125_CheckAdDate($thead->end_date, $thead->id);
 if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
-echo '<a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a>';
-echo '</div>';
+echo '<div class="wp125ad"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a></div>';
+$ads_shown++;
+}
+for ($ads_shown; $ads_shown < $setting_num_slots; $ads_shown++) {
+echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>';
 }
 echo '</div>';
 }
 if ($setting_ad_orientation=='2c') {
 echo '<div id="wp125adwrap_2c">';
+$ads_shown = 0;
 foreach ($theads as $thead){
 wp125_CheckAdDate($thead->end_date, $thead->id);
 if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
 echo '<div class="wp125ad"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a></div>';
+$ads_shown++;
+}
+for ($ads_shown; $ads_shown < $setting_num_slots; $ads_shown++) {
+echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>';
 }
 echo '</div>';
 }
