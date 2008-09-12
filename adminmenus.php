@@ -317,7 +317,7 @@ $setting_defaultad = get_option("wp125_defaultad");
 
 function wp125_admin_page_footer() {
 echo '<div style="margin-top:45px; font-size:0.87em;">';
-echo '<div style="float:right;"><a href="http://www.webmaster-source.com/donate/" title="Why should you donate $5? Click to find out..."><img src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" alt="Donate" /></a></div>';
+echo '<div style="float:right;"><a href="http://www.webmaster-source.com/donate/" title="Why should you donate a few dollars? Click to find out..."><img src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" alt="Donate" /></a></div>';
 echo '<div><a href="'.wp125_get_plugin_dir('url').'/readme.txt">Documentation</a> | <a href="http://www.webmaster-source.com/wp125-ad-plugin-wordpress/">WP125 Homepage</a></div>';
 echo '</div>';
 }

@@ -5,8 +5,8 @@ Author URI: http://www.webmaster-source.com
 Donate link: http://www.webmaster-source.com/donate/
 Tags: ads, 125x125, management, advertisement
 Requires at least: 2.3
-Tested up to: 2.6
-Stable tag: 1.0.0
+Tested up to: 2.6.2
+Stable tag: 1.1.0
 
 
 Easy management of 125x125 ads on your blog.  Ads can be run for a specified number of days, and will automatically be taken down. Track clicks too.
@@ -59,6 +59,20 @@ When an ad's time duration is over, it disappears off your site, and is removed 
 = What if I don't want an ad to be taken down automatically? =
 Just select "I'll remove it manually" for the expiration date when you go to create the ad.
 
+= How do I style my ads different than the default? =
+First, uncheck the Default Style box on the Settings page. This will remove the default styling. Next, make use of your mad CSS skills to re-style the ads. Here's what the default CSS looks like:
+
+`/* Styles for one-column display */
+#wp125adwrap_1c { width:100%; }
+#wp125adwrap_1c .wp125ad { margin-bottom:10px; }
+
+/* Styles for two-column display */
+#wp125adwrap_2c { width:100%; }
+#wp125adwrap_2c .wp125ad { width:125px; float:left; padding:10px; }
+
+/* Buy Ad Link */
+#wp125_buyadlink { padding:10px; clear:both; }`
+
 
 
 == Screenshots ==
@@ -74,3 +88,9 @@ Just select "I'll remove it manually" for the expiration date when you go to cre
 
 == Support ==
 If you're having a problem with the plugin, try posting on the official WordPress forum at http://wordpress.org/support/ (be sure to use the tag "WP125"!). I, or another user of the plugin, will hopefully be able to answer your questions. Or send me an email via the contact form on Webmaster-Source.com.
+
+
+
+== Version History ==
+* 1.0.0 - Initial release
+* 1.1.0 - Some security and performance fixes, adds several new customization options and a few major features.

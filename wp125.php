@@ -9,6 +9,9 @@ Version: 1.1.0
 */
 
 
+define("MANAGEMENT_PERMISSION", "edit_themes"); //The minimum privilege required to manage ads. http://tinyurl.com/wpprivs
+
+
 //Ad Click Redirect
 add_action('init', 'wp125_adclick');
 function wp125_adclick() {
@@ -61,10 +64,10 @@ echo $after_widget;
 //Add the Admin Menus
 if (is_admin()) {
 function wp125_add_admin_menu() {
-add_menu_page("125x125 Ads", "Ads", "edit_themes", __FILE__, "wp125_write_managemenu");
-add_submenu_page(__FILE__, "Manage 125x125 Ads", "Manage", "edit_themes", __FILE__, "wp125_write_managemenu");
-add_submenu_page(__FILE__, "Add/Edit 125x125 Ads", "Add/Edit", "edit_themes", 'wp125_addedit', "wp125_write_addeditmenu");
-add_submenu_page(__FILE__, "125x125 Ad Settings", "Settings", "edit_themes", 'wp125_settings', "wp125_write_settingsmenu");
+add_menu_page("125x125 Ads", "Ads", MANAGEMENT_PERMISSION, __FILE__, "wp125_write_managemenu");
+add_submenu_page(__FILE__, "Manage 125x125 Ads", "Manage", MANAGEMENT_PERMISSION, __FILE__, "wp125_write_managemenu");
+add_submenu_page(__FILE__, "Add/Edit 125x125 Ads", "Add/Edit", MANAGEMENT_PERMISSION, 'wp125_addedit', "wp125_write_addeditmenu");
+add_submenu_page(__FILE__, "125x125 Ad Settings", "Settings", MANAGEMENT_PERMISSION, 'wp125_settings', "wp125_write_settingsmenu");
 }
 
 //Include menus
@@ -100,33 +103,47 @@ $setting_buyad_url = get_option("wp125_buyad_url");
 $setting_defaultad = get_option("wp125_defaultad");
 $adtable_name = $wpdb->prefix . "wp125_ads";
 if ($setting_ad_order == 'random') { $theorder = 'RAND() LIMIT '.$setting_num_slots; } else { $theorder = 'slot ASC'; }
-$theads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status = '1' ORDER BY $theorder", OBJECT);
+$theads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status = '1' ORDER BY $theorder", ARRAY_A);
 if ($theads) {
 if ($setting_ad_orientation=='1c') {
 echo '<div id="wp125adwrap_1c">';
-$ads_shown = 0;
+$arraycount = 0;
 foreach ($theads as $thead){
-wp125_CheckAdDate($thead->end_date, $thead->id);
-if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
-echo '<div class="wp125ad"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a></div>';
-$ads_shown++;
+wp125_CheckAdDate($thead['end_date'], $thead['id']);
+$theslot = $thead['slot'];
+$adguidearray[$theslot] = $thead;
+$arraycount++;
 }
-for ($ads_shown; $ads_shown < $setting_num_slots; $ads_shown++) {
-echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>';
+if ($setting_ad_order == 'random') {
+srand((float)microtime() * 1000000);
+shuffle($adguidearray);
+$adguidearray_shufflefix = $adguidearray[0]; $adguidearray[0]=''; $adguidearray[]=$adguidearray_shufflefix;
+}
+for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
+if (isset($adguidearray[$curslot])) {
+echo '<div class="wp125ad"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></div>';
+} else { echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>'; }
 }
 echo '</div>';
 }
 if ($setting_ad_orientation=='2c') {
 echo '<div id="wp125adwrap_2c">';
-$ads_shown = 0;
+$arraycount = 0;
 foreach ($theads as $thead){
-wp125_CheckAdDate($thead->end_date, $thead->id);
-if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
-echo '<div class="wp125ad"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a></div>';
-$ads_shown++;
+wp125_CheckAdDate($thead['end_date'], $thead['id']);
+$theslot = $thead['slot'];
+$adguidearray[$theslot] = $thead;
+$arraycount++;
 }
-for ($ads_shown; $ads_shown < $setting_num_slots; $ads_shown++) {
-echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>';
+if ($setting_ad_order == 'random') {
+srand((float)microtime() * 1000000);
+shuffle($adguidearray);
+$adguidearray_shufflefix = $adguidearray[0]; $adguidearray[0]=''; $adguidearray[]=$adguidearray_shufflefix;
+}
+for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
+if (isset($adguidearray[$curslot])) {
+echo '<div class="wp125ad"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></div>';
+} else { echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>'; }
 }
 echo '</div>';
 }
