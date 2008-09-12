@@ -285,7 +285,7 @@ $setting_defaultad = get_option("wp125_defaultad");
 
 <tr valign="top">
 <th scope="row">Ad Sales Page</th>
-<td><input name="salespage" type="text" id="salespage" value="<?php echo $setting_buyad_url; ?>" size="50" /><br/>Do you have a page with statistics and prices? (Leave blank to disable)</td>
+<td><input name="salespage" type="text" id="salespage" value="<?php echo $setting_buyad_url; ?>" size="50" /><br/>Do you have a page with statistics and prices? (Default Ads will link here)</td>
 </tr>
 
 <tr valign="top">

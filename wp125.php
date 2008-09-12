@@ -147,7 +147,6 @@ echo '<div class="wp125ad"><img src="'.$adguidearray[$curslot]['image_url'].'" a
 }
 echo '</div>';
 }
-if ($setting_buyad_url!='') { echo '<div id="wp125_buyadlink"><a href="'.$setting_buyad_url.'">Your ad here.</a></div>'; }
 }
 }
 

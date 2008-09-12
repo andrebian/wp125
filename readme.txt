@@ -5,7 +5,7 @@ Author URI: http://www.webmaster-source.com
 Donate link: http://www.webmaster-source.com/donate/
 Tags: ads, 125x125, management, advertisement
 Requires at least: 2.3
-Tested up to: 2.6.2
+Tested up to: 2.6
 Stable tag: 1.1.0
 
 
@@ -68,10 +68,7 @@ First, uncheck the Default Style box on the Settings page. This will remove the 
 
 /* Styles for two-column display */
 #wp125adwrap_2c { width:100%; }
-#wp125adwrap_2c .wp125ad { width:125px; float:left; padding:10px; }
-
-/* Buy Ad Link */
-#wp125_buyadlink { padding:10px; clear:both; }`
+#wp125adwrap_2c .wp125ad { width:125px; float:left; padding:10px; }`
 
 
 
