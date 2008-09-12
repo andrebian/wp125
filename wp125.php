@@ -121,7 +121,8 @@ $adguidearray_shufflefix = $adguidearray[0]; $adguidearray[0]=''; $adguidearray[
 }
 for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
 if (isset($adguidearray[$curslot])) {
-echo '<div class="wp125ad"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></div>';
+if ($adguidearray[$curslot]['clicks'] != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$adguidearray[$curslot]['id']; } else { $linkurl = $adguidearray[$curslot]['target']; }
+echo '<div class="wp125ad"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>';
 } else { echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>'; }
 }
 echo '</div>';
@@ -142,7 +143,8 @@ $adguidearray_shufflefix = $adguidearray[0]; $adguidearray[0]=''; $adguidearray[
 }
 for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
 if (isset($adguidearray[$curslot])) {
-echo '<div class="wp125ad"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></div>';
+if ($adguidearray[$curslot]['clicks'] != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$adguidearray[$curslot]['id']; } else { $linkurl = $adguidearray[$curslot]['target']; }
+echo '<div class="wp125ad"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>';
 } else { echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>'; }
 }
 echo '</div>';
