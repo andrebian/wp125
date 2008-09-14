@@ -85,7 +85,14 @@ global $wpdb;
 $settingtable_name = $wpdb->prefix . "wp125_settings";
 $adtable_name = $wpdb->prefix . "wp125_ads";
 // Retrieve settings
-$wp125settings = $wpdb->get_row("SELECT * FROM $settingtable_name WHERE ad_orientation != '' ", OBJECT);
+$setting_ad_orientation = get_option("wp125_ad_orientation");
+$setting_num_slots = get_option("wp125_num_slots");
+$setting_ad_order = get_option("wp125_ad_order");
+$setting_buyad_url = get_option("wp125_buyad_url");
+$setting_widget_title = get_option("wp125_widget_title");
+$setting_disable_default_style = get_option("wp125_disable_default_style");
+$setting_emailonexp = get_option("wp125_emailonexp");
+$setting_defaultad = get_option("wp125_defaultad");
 //If post is being edited, grab current info
 if ($_GET['editad']!='') {
 $theid = $_GET['editad'];
@@ -152,7 +159,7 @@ echo '<div id="message" class="updated fade"><p>Ad deleted.</p></div>';
 <th scope="row">Slot</th>
 <td><label for="adslot">
 <select name="adslot" id="adslot">
-<?php for ($count = 1; $count <= $wp125settings->num_slots; $count += 1) { ?>
+<?php for ($count = 1; $count <= $setting_num_slots; $count += 1) { ?>
 <option value="<?php echo $count; ?>" <?php if ($count == $editingad->slot) { echo 'selected="selected"'; } ?>>#<?php echo $count; ?></option>
 <?php } ?>
 </select></label>
