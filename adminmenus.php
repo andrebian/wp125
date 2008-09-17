@@ -82,7 +82,6 @@ echo '</div>';
 function wp125_write_addeditmenu() {
 //DB Data
 global $wpdb;
-$settingtable_name = $wpdb->prefix . "wp125_settings";
 $adtable_name = $wpdb->prefix . "wp125_ads";
 // Retrieve settings
 $setting_ad_orientation = get_option("wp125_ad_orientation");
