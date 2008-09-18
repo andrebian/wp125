@@ -5,7 +5,7 @@ Plugin URI: http://www.webmaster-source.com/wp125-ad-plugin-wordpress/
 Description: Easily manage 125x125 ads within your WordPress Dashboard.
 Author: Matt Harzewski (redwall_hp)
 Author URI: http://www.webmaster-source.com
-Version: 1.1.4
+Version: 1.1.5
 */
 
 
@@ -194,7 +194,7 @@ return;
 
 //Hooks
 add_action("plugins_loaded", "wp125_create_ad_widget"); //Create the Widget
-add_action('admin_menu', 'wp125_add_admin_menu'); //Admin pages
+if (is_admin()) { add_action('admin_menu', 'wp125_add_admin_menu'); } //Admin pages
 
 
 
