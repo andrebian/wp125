@@ -42,7 +42,7 @@ echo '<ul class="subsubsub">'; ?>
 <th scope="col">Start Date</th>
 <th scope="col">End Date</th>
 <th scope="col"></th>
-<th scope="col"></th>
+<th scope="col" style="text-align:right;"><a href="admin.php?page=wp125_addedit" class="button rbutton">Add New</a></th>
 </tr></thead>
 <tbody>';
 

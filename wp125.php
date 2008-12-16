@@ -15,7 +15,7 @@ define("MANAGEMENT_PERMISSION", "edit_themes"); //The minimum privilege required
 //Ad Click Redirect
 add_action('init', 'wp125_adclick');
 function wp125_adclick() {
-if ($_GET['adclick'] != "" && ctype_digit($_GET['adclick'])) {
+if (isset($_GET['adclick']) && $_GET['adclick'] != "" && ctype_digit($_GET['adclick'])) {
 $theid = $_GET['adclick'];
 global $wpdb;
 $adtable_name = $wpdb->prefix . "wp125_ads";
@@ -190,6 +190,13 @@ $mail_sent = @mail(get_option('wp125_emailonexp'), "An ad on your blog has expir
 }
 return;
 }
+
+
+function wp125_add_menu_favorite($actions) {
+$actions['admin.php?page=wp125/wp125.php'] = array('Manage Ads', 'manage_options');
+return $actions;
+}
+add_filter('favorite_actions', 'wp125_add_menu_favorite'); //Favorites Menu
 
 
 //Hooks

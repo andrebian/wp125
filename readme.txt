@@ -26,6 +26,8 @@ Features include:
 * Keep track of how many times an ad is clicked
 * When creating a new ad, you don't have to calculate the end date yourself. Just input how many days you wish the ad to run for, and the correct date will be applied. The ad will be automatically taken down when the time comes.
 * When an ad run is over, the record is archived on the Inactive ads screen, so you can check on the final click count, or revive the ad for another run.
+* When an ad slot is empty, a placeholder ad of your choice will be displayed. This could be a “Your Ad Here” image linking to a page with statistics and pricing, or an affiliate link.
+* Optionally recieve email notifications when an ad expires. Useful if you send follow-up messages to advertisers, or if you just want to stay in the know.
 
 
 
