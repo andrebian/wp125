@@ -52,7 +52,7 @@ function wp125_write_ads_widget($args) {
 extract($args);
 echo $before_widget;
 if (get_option("wp125_widget_title")!='') {
-echo $before_title; echo get_option("wp125_widget_title"); echo $after_title;
+echo "\n".$before_title; echo get_option("wp125_widget_title"); echo $after_title;
 }
 wp125_write_ads();
 echo $after_widget;
@@ -77,18 +77,26 @@ require_once(dirname(__FILE__).'/adminmenus.php');
 
 
 //Check Ad Date, and deactivate if the time is up
-function wp125_CheckAdDate($thedate, $theid) {
-global $wpdb;
-$adtable_name = $wpdb->prefix . "wp125_ads";
-if ($thedate!='00/00/0000') {
-$today = strtotime(date('m').'/'.date('d').'/'.date('Y'));
-$thedate = strtotime($thedate);
-if ($today > $thedate) {
-$updatedb = "UPDATE $adtable_name SET status='0' WHERE id='$theid'";
-$results = $wpdb->query($updatedb);
-sendExpirationEmail($theid);
-} else { return; }
-} else { return; }
+function wp125_CheckAdDate($thedate, $theid, $pre_exp_email) {
+	global $wpdb;
+	$adtable_name = $wpdb->prefix . "wp125_ads";
+	if ($thedate!='00/00/0000') {
+		$today = strtotime(date('m').'/'.date('d').'/'.date('Y'));
+		$thedefdate = $thedate;
+		$thedate = strtotime($thedate);
+		if ($today > $thedate) {
+			$updatedb = "UPDATE $adtable_name SET status='0', SET pre_exp_email='0' WHERE id='$theid'";
+			$results = $wpdb->query($updatedb);
+			sendExpirationEmail($theid);
+		}
+		$dayssetting = get_option("wp125_daysbeforeexp");
+		if ( strtotime(date('m').'/'.date('d').'/'.date('Y')) > strtotime($thedefdate." - $dayssetting days") AND $dayssetting>0 AND $pre_exp_email!=1 ) {
+			sendPreExpirationEmail($theid);
+			$updatedb = "UPDATE $adtable_name SET pre_exp_email='1' WHERE id='$theid'";
+			$results = $wpdb->query($updatedb);
+		}
+		return;
+	} else { return; }
 }
 
 
@@ -106,10 +114,10 @@ if ($setting_ad_order == 'random') { $theorder = 'RAND() LIMIT '.$setting_num_sl
 $theads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status = '1' ORDER BY $theorder", ARRAY_A);
 if ($theads) {
 if ($setting_ad_orientation=='1c') {
-echo '<div id="wp125adwrap_1c">';
+echo '<div id="wp125adwrap_1c">'."\n";
 $arraycount = 0;
 foreach ($theads as $thead){
-wp125_CheckAdDate($thead['end_date'], $thead['id']);
+wp125_CheckAdDate($thead['end_date'], $thead['id'], $thead['pre_exp_email']);
 $theslot = $thead['slot'];
 $adguidearray[$theslot] = $thead;
 $arraycount++;
@@ -120,18 +128,19 @@ shuffle($adguidearray);
 $adguidearray_shufflefix = $adguidearray[0]; $adguidearray[0]=''; $adguidearray[]=$adguidearray_shufflefix;
 }
 for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
+$altclass = ( ' odd' != $altclass ) ? ' odd' : ' even';
 if (isset($adguidearray[$curslot])) {
 if ($adguidearray[$curslot]['clicks'] != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$adguidearray[$curslot]['id']; } else { $linkurl = $adguidearray[$curslot]['target']; }
-echo '<div class="wp125ad"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>';
-} else { echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>'; }
+echo '<div class="wp125ad'.$altclass.'"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>'."\n";
+} else { echo '<div class="wp125ad'.$altclass.'"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>'."\n"; }
 }
-echo '</div>';
+echo "</div>\n";
 }
 if ($setting_ad_orientation=='2c') {
-echo '<div id="wp125adwrap_2c">';
+echo '<div id="wp125adwrap_2c">'."\n";
 $arraycount = 0;
 foreach ($theads as $thead){
-wp125_CheckAdDate($thead['end_date'], $thead['id']);
+wp125_CheckAdDate($thead['end_date'], $thead['id'], $thead['pre_exp_email']);
 $theslot = $thead['slot'];
 $adguidearray[$theslot] = $thead;
 $arraycount++;
@@ -142,12 +151,13 @@ shuffle($adguidearray);
 $adguidearray_shufflefix = $adguidearray[0]; $adguidearray[0]=''; $adguidearray[]=$adguidearray_shufflefix;
 }
 for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
+$altclass = ( ' odd' != $altclass ) ? ' odd' : ' even';
 if (isset($adguidearray[$curslot])) {
 if ($adguidearray[$curslot]['clicks'] != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$adguidearray[$curslot]['id']; } else { $linkurl = $adguidearray[$curslot]['target']; }
-echo '<div class="wp125ad"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>';
-} else { echo '<div class="wp125ad"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>'; }
+echo '<div class="wp125ad'.$altclass.'"><a href="'.$linkurl.'" rel="nofollow"><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>'."\n";
+} else { echo '<div class="wp125ad'.$altclass.'"><a href="'.$setting_buyad_url.'" rel="nofollow"><img src="'.$setting_defaultad.'" alt="" /></a></div>'."\n"; }
 }
-echo '</div>';
+echo "</div>\n";
 }
 }
 }
@@ -158,7 +168,7 @@ global $wpdb;
 $adtable_name = $wpdb->prefix . "wp125_ads";
 $thead = $wpdb->get_row("SELECT * FROM $adtable_name WHERE slot = '$theslot' AND status = '1' ORDER BY id DESC", OBJECT);
 if ($thead) {
-wp125_CheckAdDate($thead->end_date, $thead->id);
+wp125_CheckAdDate($thead->end_date, $thead->id, $thead->pre_exp_email);
 if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
 echo '<a href="'.$linkurl.'" rel="nofollow"><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a>';
 } else { echo '<a href="'.get_option("wp125_buyad_url").'" rel="nofollow"><img src="'.get_option("wp125_defaultad").'" alt="Your Ad Here" /></a>'; }
@@ -189,6 +199,22 @@ $headers = "From: $from\r\nReply-To: $from";
 $mail_sent = @mail(get_option('wp125_emailonexp'), "An ad on your blog has expired", $message, $headers);
 }
 return;
+}
+
+
+//Handle pre-expiration emails
+function sendPreExpirationEmail($theid) {
+	global $wpdb;
+	$adtable_name = $wpdb->prefix . "wp125_ads";
+	$thead = $wpdb->get_row("SELECT * FROM $adtable_name WHERE id='$theid'", OBJECT);
+	if (get_option('wp125_emailonexp')!='') {
+		$theblog = get_option('blogname');
+		$from = get_option('admin_email');
+		$message = "One of the advertisements on $theblog will be expiring soon.\n\nAD NAME: ".$thead->name."\nAD URL: ".$thead->target."\nSTART DATE: ".$thead->start_date."\nEND DATE: ".$thead->end_date."\n\nFor more information, and to manage your ads, please log in to your WordPress administration.\n\n\n*** Powered by WordPress and WP125 ***";
+		$headers = "From: $from\r\nReply-To: $from";
+		$mail_sent = @mail(get_option('wp125_emailonexp'), "An ad on your blog expires soon", $message, $headers);
+	}
+	return;
 }
 
 

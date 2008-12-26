@@ -27,7 +27,7 @@ if ($_GET['wp125action'] == "activateconf") {
 $theid = $_GET['theid'];
 global $wpdb, $table_prefix;
 $adtable_name = $wpdb->prefix . "wp125_ads";
-$wpdb->query("UPDATE $adtable_name SET status = '1' WHERE id = '$theid'");
+$wpdb->query("UPDATE $adtable_name SET status = '1', SET pre_exp_email='0' WHERE id = '$theid'");
 echo '<div id="message" class="updated fade"><p>Ad activated.</p></div>';
 }
 
@@ -234,6 +234,7 @@ $post_salespage = $wpdb->escape($_POST['salespage']);
 $post_widgettitle = $wpdb->escape($_POST['widgettitle']);
 $post_defaultstyle = $wpdb->escape($_POST['defaultstyle']);
 $post_emailonexp = $wpdb->escape($_POST['emailonexp']);
+$post_daysbeforeexp = $wpdb->escape($_POST['daysbeforeexp']);
 $post_defaultad = $wpdb->escape($_POST['defaultad']);
 if ($post_defaultstyle!='on') { $post_defaultstyle = 'yes'; } else { $post_defaultstyle = ''; }
 update_option("wp125_ad_orientation", $post_adorient);
@@ -243,6 +244,7 @@ update_option("wp125_buyad_url", $post_salespage);
 update_option("wp125_widget_title", $post_widgettitle);
 update_option("wp125_disable_default_style", $post_defaultstyle);
 update_option("wp125_emailonexp", $post_emailonexp);
+update_option("wp125_daysbeforeexp", $post_daysbeforeexp);
 update_option("wp125_defaultad", $post_defaultad);
 echo '<div id="message" class="updated fade"><p>Settings updated.</p></div>';
 }
@@ -255,6 +257,7 @@ $setting_widget_title = get_option("wp125_widget_title");
 $setting_disable_default_style = get_option("wp125_disable_default_style");
 $setting_emailonexp = get_option("wp125_emailonexp");
 $setting_defaultad = get_option("wp125_defaultad");
+$setting_daysbeforeexp = get_option("wp125_daysbeforeexp");
 ?><div class="wrap">
 <h2>Settings</h2>
 <form method="post" action="admin.php?page=wp125_settings">
@@ -286,12 +289,12 @@ $setting_defaultad = get_option("wp125_defaultad");
 
 <tr valign="top">
 <th scope="row">Widget Title</th>
-<td><input name="widgettitle" type="text" id="widgettitle" value="<?php echo $setting_widget_title; ?>" size="50" /><br/>The title to be displayed in the widget. (Leave blank to disable)</td>
+<td><input name="widgettitle" type="text" id="widgettitle" value="<?php echo $setting_widget_title; ?>" size="50" /><br/>The title to be displayed in the widget. <em>(Leave blank to disable.)</em></td>
 </tr>
 
 <tr valign="top">
 <th scope="row">Ad Sales Page</th>
-<td><input name="salespage" type="text" id="salespage" value="<?php echo $setting_buyad_url; ?>" size="50" /><br/>Do you have a page with statistics and prices? (Default Ads will link here)</td>
+<td><input name="salespage" type="text" id="salespage" value="<?php echo $setting_buyad_url; ?>" size="50" /><br/>Do you have a page with statistics and prices? <em>(Default Ads will link here.)</em></td>
 </tr>
 
 <tr valign="top">
@@ -301,7 +304,12 @@ $setting_defaultad = get_option("wp125_defaultad");
 
 <tr valign="top">
 <th scope="row">Expiration Email</th>
-<td><input name="emailonexp" type="text" id="emailonexp" value="<?php echo $setting_emailonexp; ?>" size="50" /><br/>Enter your email address if you would like to be emailed when an ad expires. (Leave blank to disable)</td>
+<td><input name="emailonexp" type="text" id="emailonexp" value="<?php echo $setting_emailonexp; ?>" size="50" /><br/>Enter your email address if you would like to be emailed when an ad expires. <em>(Leave blank to disable.)</em></td>
+</tr>
+
+<tr valign="top">
+<th scope="row">Pre-Expiration Email</th>
+<td>Remind me <input name="daysbeforeexp" type="text" id="daysbeforeexp" value="<?php echo $setting_daysbeforeexp; ?>" size="2" /> days before an ad expires. <em>(Emails will be sent to the address specified above).</em></td>
 </tr>
 
 <tr valign="top">
