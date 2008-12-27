@@ -4,7 +4,7 @@ require_once(ABSPATH . 'wp-admin/upgrade.php');
 //***Installer variables***
 global $wpdb;
 $table_name = $wpdb->prefix . "wp125_ads";
-$wp125_db_version = "1.33670";
+$wp125_db_version = "1.33671";
 //***Installer***
 if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
 $sql = "CREATE TABLE " . $table_name . " (
@@ -61,7 +61,7 @@ add_option("wp125_buyad_url", "");
 add_option("wp125_disable_default_style", "");
 add_option("wp125_widget_title", "Ads");
 add_option("wp125_dofollow", "");
-add_option("wp125_emailonexp", get_option('blogname'));
+add_option("wp125_emailonexp", get_option('admin_email'));
 add_option("wp125_daysbeforeexp", "3");
 add_option("wp125_defaultad", wp125_get_plugin_dir('url')."/youradhere.jpg");
 update_option( "wp125_db_version", $wp125_db_version );

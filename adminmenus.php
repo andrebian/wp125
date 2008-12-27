@@ -32,7 +32,7 @@ echo '<div id="message" class="updated fade"><p>Ad activated.</p></div>';
 }
 
 echo '<ul class="subsubsub">'; ?>
-<li><a href="admin.php?page=wp125/wp125.php"  <?php if ($_GET['showmanage'] != 'inactive') { echo 'class="current"'; } ?>>Active Ads</a> |</li><li><a href="admin.php?page=wp125/wp125.php&showmanage=inactive" <?php if ($_GET['showmanage'] == 'inactive') { echo 'class="current"'; } ?>>Inactive Ads</a></li>
+<li><a href="admin.php?page=wp125/wp125.php"  <?php if ($_GET['showmanage'] != 'inactive') { echo 'class="current"'; } ?>>Active Ads</a> | </li><li><a href="admin.php?page=wp125/wp125.php&showmanage=inactive" <?php if ($_GET['showmanage'] == 'inactive') { echo 'class="current"'; } ?>>Inactive Ads</a></li>
 <?php echo '</ul>
 <table class="widefat">
 <thead><tr>

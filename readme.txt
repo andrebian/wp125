@@ -2,7 +2,7 @@
 Contributors: redwall_hp
 Plugin URI: http://www.webmaster-source.com/wp125-ad-plugin-wordpress/
 Author URI: http://www.webmaster-source.com
-Donate link: http://www.webmaster-source.com/donate/
+Donate link: http://www.webmaster-source.com/donate/?plugin=wp125
 Tags: ads, 125x125, management, advertisement
 Requires at least: 2.3
 Tested up to: 2.7
