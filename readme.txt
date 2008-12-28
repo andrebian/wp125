@@ -72,6 +72,9 @@ First, uncheck the Default Style box on the Settings page. This will remove the 
 #wp125adwrap_2c { width:100%; }
 #wp125adwrap_2c .wp125ad { width:125px; float:left; padding:10px; }`
 
+= How do I make the ads open in a new window? =
+If you absolutely *must* have your ads open in a new window when clicked, open the wp125.php file and find the `define(...` line near the top and remove the first `//` from the beginning.
+
 
 
 == Screenshots ==
