@@ -5,7 +5,7 @@ Plugin URI: http://www.webmaster-source.com/wp125-ad-plugin-wordpress/
 Description: Easily manage 125x125 ads within your WordPress Dashboard.
 Author: Matt Harzewski (redwall_hp)
 Author URI: http://www.webmaster-source.com
-Version: 1.2.0
+Version: 1.2.1
 */
 
 
@@ -85,7 +85,7 @@ function wp125_CheckAdDate($thedate, $theid, $pre_exp_email) {
 		$thedefdate = $thedate;
 		$thedate = strtotime($thedate);
 		if ($today > $thedate) {
-			$updatedb = "UPDATE $adtable_name SET status='0', SET pre_exp_email='0' WHERE id='$theid'";
+			$updatedb = "UPDATE $adtable_name SET status='0' AND pre_exp_email='0' WHERE id='$theid'";
 			$results = $wpdb->query($updatedb);
 			sendExpirationEmail($theid);
 		}
