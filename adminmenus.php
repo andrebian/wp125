@@ -27,7 +27,7 @@ if ($_GET['wp125action'] == "activateconf") {
 $theid = $_GET['theid'];
 global $wpdb, $table_prefix;
 $adtable_name = $wpdb->prefix . "wp125_ads";
-$wpdb->query("UPDATE $adtable_name SET status = '1', SET pre_exp_email='0' WHERE id = '$theid'");
+$wpdb->query("UPDATE $adtable_name SET status = '1' AND pre_exp_email='0' WHERE id = '$theid'");
 echo '<div id="message" class="updated fade"><p>Ad activated.</p></div>';
 }
 
@@ -125,7 +125,7 @@ $updatedb = "INSERT INTO $adtable_name (slot, name, start_date, end_date, clicks
 $results = $wpdb->query($updatedb);
 echo '<div id="message" class="updated fade"><p>Ad &quot;'.$post_adname.'&quot; created.</p></div>';
 } else {
-$updatedb = "UPDATE $adtable_name SET slot = '$post_adslot', name = '$post_adname', end_date = '$theenddate', target = '$post_adtarget', image_url = '$post_adimage' WHERE id='$post_editedad'";
+$updatedb = "UPDATE $adtable_name SET slot = '$post_adslot', name = '$post_adname', end_date = '$theenddate', target = '$post_adtarget', image_url = '$post_adimage', pre_exp_email = '0' WHERE id='$post_editedad'";
 $results = $wpdb->query($updatedb);
 echo '<div id="message" class="updated fade"><p>Ad &quot;'.$post_adname.'&quot; updated.</p></div>';
 }
