@@ -3,46 +3,46 @@
 //Write Manage Menu
 function wp125_write_managemenu() {
 echo '<div class="wrap">
-<h2>Manage Ads</h2>';
+<h2>'.__('Manage Ads', 'wp125').'</h2>';
 
 //Handle deactivations
 if ($_GET['wp125action'] == "deactivate") {
 $theid = $_GET['theid'];
-echo '<div id="message" class="updated fade"><p>Are you sure you want to deactivate the ad? <a href="admin.php?page=wp125/wp125.php&wp125action=deactivateconf&theid='.$theid.'">Yes</a> &nbsp; <a href="admin.php?page=wp125/wp125.php">No!</a></p></div>';
+echo '<div id="message" class="updated fade"><p>'.__('Are you sure you want to deactivate the ad?', 'wp125').' <a href="admin.php?page=wp125/wp125.php&wp125action=deactivateconf&theid='.$theid.'">'.__('Yes', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125/wp125.php">'.__('No!', 'wp125').'</a></p></div>';
 }
 if ($_GET['wp125action'] == "deactivateconf") {
 $theid = $_GET['theid'];
 global $wpdb, $table_prefix;
 $adtable_name = $wpdb->prefix . "wp125_ads";
 $wpdb->query("UPDATE $adtable_name SET status = '0' WHERE id = '$theid'");
-echo '<div id="message" class="updated fade"><p>Ad deactivated.</p></div>';
+echo '<div id="message" class="updated fade"><p>'.__('Ad deactivated.', 'wp125').'</p></div>';
 }
 
 //Handle REactivations
 if ($_GET['wp125action'] == "activate") {
 $theid = $_GET['theid'];
-echo '<div id="message" class="updated fade"><p>Are you sure you want to reactivate the ad? <a href="admin.php?page=wp125/wp125.php&showmanage=inactive&wp125action=activateconf&theid='.$theid.'">Yes</a> &nbsp; <a href="admin.php?page=wp125/wp125.php&showmanage=inactive">No!</a></p></div>';
+echo '<div id="message" class="updated fade"><p>'.__('Are you sure you want to reactivate the ad?', 'wp125').' <a href="admin.php?page=wp125/wp125.php&showmanage=inactive&wp125action=activateconf&theid='.$theid.'">'.__('Yes', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125/wp125.php&showmanage=inactive">'.__('No!', 'wp125').'</a></p></div>';
 }
 if ($_GET['wp125action'] == "activateconf") {
 $theid = $_GET['theid'];
 global $wpdb, $table_prefix;
 $adtable_name = $wpdb->prefix . "wp125_ads";
 $wpdb->query("UPDATE $adtable_name SET status = '1' AND pre_exp_email='0' WHERE id = '$theid'");
-echo '<div id="message" class="updated fade"><p>Ad activated.</p></div>';
+echo '<div id="message" class="updated fade"><p>'.__('Ad activated.', 'wp125').'</p></div>';
 }
 
 echo '<ul class="subsubsub">'; ?>
-<li><a href="admin.php?page=wp125/wp125.php"  <?php if ($_GET['showmanage'] != 'inactive') { echo 'class="current"'; } ?>>Active Ads</a> | </li><li><a href="admin.php?page=wp125/wp125.php&showmanage=inactive" <?php if ($_GET['showmanage'] == 'inactive') { echo 'class="current"'; } ?>>Inactive Ads</a></li>
+<li><a href="admin.php?page=wp125/wp125.php"  <?php if ($_GET['showmanage'] != 'inactive') { echo 'class="current"'; } ?>><?php _e('Active Ads', 'wp125'); ?></a> | </li><li><a href="admin.php?page=wp125/wp125.php&showmanage=inactive" <?php if ($_GET['showmanage'] == 'inactive') { echo 'class="current"'; } ?>><?php _e('Inactive Ads', 'wp125'); ?></a></li>
 <?php echo '</ul>
 <table class="widefat">
 <thead><tr>
-<th scope="col">Slot</th>
-<th scope="col">Name</th>
-<th scope="col" class="num">Clicks</th>
-<th scope="col">Start Date</th>
-<th scope="col">End Date</th>
+<th scope="col">'.__('Slot', 'wp125').'</th>
+<th scope="col">'.__('Name', 'wp125').'</th>
+<th scope="col" class="num">'.__('Clicks', 'wp125').'</th>
+<th scope="col">'.__('Start Date', 'wp125').'</th>
+<th scope="col">'.__('End Date', 'wp125').'</th>
 <th scope="col"></th>
-<th scope="col" style="text-align:right;"><a href="admin.php?page=wp125_addedit" class="button rbutton">Add New</a></th>
+<th scope="col" style="text-align:right;"><a href="admin.php?page=wp125_addedit" class="button rbutton">'.__('Add New', 'wp125').'</a></th>
 </tr></thead>
 <tbody>';
 
@@ -59,19 +59,19 @@ foreach ($wp125db as $wp125db){
 echo '<tr>';
 echo '<td>'.$wp125db->slot.'</td>';
 echo '<td><strong>'.$wp125db->name.'</strong></td>';
-if ($wp125db->clicks!='-1') { echo '<td class="num">'.$wp125db->clicks.'</td>'; } else { echo '<td class="num">N/A</td>'; }
+if ($wp125db->clicks!='-1') { echo '<td class="num">'.$wp125db->clicks.'</td>'; } else { echo '<td class="num">'.__('N/A', 'wp125').'</td>'; }
 echo '<td>'.$wp125db->start_date.'</td>';
 echo '<td>'.$wp125db->end_date.'</td>';
-echo '<td><a href="admin.php?page=wp125_addedit&editad='.$wp125db->id.'">Edit</a></td>';
+echo '<td><a href="admin.php?page=wp125_addedit&editad='.$wp125db->id.'">'.__('Edit', 'wp125').'</a></td>';
 if ($_GET['showmanage'] == 'inactive') {
-echo '<td><a href="admin.php?page=wp125/wp125.php&showmanage=inactive&wp125action=activate&theid='.$wp125db->id.'">Activate</a></td>';
+echo '<td><a href="admin.php?page=wp125/wp125.php&showmanage=inactive&wp125action=activate&theid='.$wp125db->id.'">'.__('Activate', 'wp125').'</a></td>';
 } else {
-echo '<td><a href="admin.php?page=wp125/wp125.php&wp125action=deactivate&theid='.$wp125db->id.'">Deactivate</a></td>';
+echo '<td><a href="admin.php?page=wp125/wp125.php&wp125action=deactivate&theid='.$wp125db->id.'">'.__('Deactivate', 'wp125').'</a></td>';
 }
 echo '</tr>';
 
 }
-} else { echo '<tr> <td colspan="8">No ads found.</td> </tr>'; }
+} else { echo '<tr> <td colspan="8">'.__('No ads found.', 'wp125').'</td> </tr>'; }
 
 echo '</tbody>
 </table>';
@@ -127,22 +127,22 @@ echo '<div id="message" class="updated fade"><p>Ad &quot;'.$post_adname.'&quot; 
 } else {
 $updatedb = "UPDATE $adtable_name SET slot = '$post_adslot', name = '$post_adname', end_date = '$theenddate', target = '$post_adtarget', image_url = '$post_adimage', pre_exp_email = '0' WHERE id='$post_editedad'";
 $results = $wpdb->query($updatedb);
-echo '<div id="message" class="updated fade"><p>Ad &quot;'.$post_adname.'&quot; updated.</p></div>';
+echo '<div id="message" class="updated fade"><p>'.__('Ad', 'wp125').' &quot;'.$post_adname.'&quot; '.__('updated.', 'wp125').'</p></div>';
 }
 }
 if ($_POST['deletead']) {
 $post_editedad = $wpdb->escape($_POST['editedad']);
-echo '<div id="message" class="updated fade"><p>Do you really want to delete this ad record? This action cannot be undone. <a href="admin.php?page=wp125_addedit&deletead='.$post_editedad.'">Yes</a> &nbsp; <a href="admin.php?page=wp125_addedit&editad='.$post_editedad.'">No!</a></p></div>';
+echo '<div id="message" class="updated fade"><p>'.__('Do you really want to delete this ad record? This action cannot be undone.', 'wp125').' <a href="admin.php?page=wp125_addedit&deletead='.$post_editedad.'">'.__('Yes', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125_addedit&editad='.$post_editedad.'">'.__('No!', 'wp125').'</a></p></div>';
 }
 if ($_GET['deletead']!='') {
 $thead=$_GET['deletead'];
 $updatedb = "DELETE FROM $adtable_name WHERE id='$thead'";
 $results = $wpdb->query($updatedb);
-echo '<div id="message" class="updated fade"><p>Ad deleted.</p></div>';
+echo '<div id="message" class="updated fade"><p>'.__('Ad deleted.', 'wp125').'</p></div>';
 }
 ?>
 
-<h2>Add/Edit Ads</h2>
+<h2><?php _e('Add/Edit Ads', 'wp125'); ?></h2>
 
 <form method="post" action="admin.php?page=wp125_addedit">
 <table class="form-table">
@@ -150,12 +150,12 @@ echo '<div id="message" class="updated fade"><p>Ad deleted.</p></div>';
 <?php if ($_GET['editad']!='') { echo '<input name="editedad" type="hidden" value="'.$_GET['editad'].'" />'; } ?>
 
 <tr valign="top">
-<th scope="row">Name</th>
-<td><input name="adname" type="text" id="adname" value="<?php echo $editingad->name; ?>" size="40" /><br/>Whose ad is this?</td>
+<th scope="row"><?php _e('Name', 'wp125'); ?></th>
+<td><input name="adname" type="text" id="adname" value="<?php echo $editingad->name; ?>" size="40" /><br/><?php _e('Whose ad is this?', 'wp125'); ?></td>
 </tr>
 
 <tr valign="top">
-<th scope="row">Slot</th>
+<th scope="row"><?php _e('Slot', 'wp125'); ?></th>
 <td><label for="adslot">
 <select name="adslot" id="adslot">
 <?php for ($count = 1; $count <= $setting_num_slots; $count += 1) { ?>
@@ -165,8 +165,8 @@ echo '<div id="message" class="updated fade"><p>Ad deleted.</p></div>';
 </td></tr>
 
 <tr valign="top">
-<th scope="row">Target URL</th>
-<td><input name="adtarget" type="text" id="adtarget" value="<?php if ($editingad->target!='') { echo $editingad->target; } else { echo 'http://'; } ?>" size="40" /><br/>Where should the ad link to?</td>
+<th scope="row"><?php _e('Target URL', 'wp125'); ?></th>
+<td><input name="adtarget" type="text" id="adtarget" value="<?php if ($editingad->target!='') { echo $editingad->target; } else { echo 'http://'; } ?>" size="40" /><br/><?php _e('Where should the ad link to?', 'wp125'); ?></td>
 </tr>
 
 <?php if ($_GET['editad']!='') {
@@ -179,17 +179,17 @@ $endyear = date('Y', $enddate);
 } else { $endmonth='00'; $endday='00'; $endyear='0000'; }
 } ?>
 <tr valign="top">
-<th scope="row">Expiration</th>
+<th scope="row"><?php _e('Expiration', 'wp125'); ?></th>
 <td><label for="adexp">
 <?php if ($_GET['editad']=='') { ?><select name="adexp" id="adexp" onChange="isOtherDate(this.value)">
-<option value="manual">I'll remove it manually</option>
-<option selected="selected" value="30">30 Days</option>
-<option value="60">60 Days</option>
-<option value="90">90 Days</option>
-<option value="120">120 Days</option>
-<option value="other">Other</option>
+<option value="manual"><?php _e("I'll remove it manually", 'wp125'); ?></option>
+<option selected="selected" value="30">30 <?php _e('Days', 'wp125'); ?></option>
+<option value="60">60 <?php _e('Days', 'wp125'); ?></option>
+<option value="90">90 <?php _e('Days', 'wp125'); ?></option>
+<option value="120">120 <?php _e('Days', 'wp125'); ?></option>
+<option value="other"><?php _e('Other', 'wp125'); ?></option>
 </select><?php } ?></label>
- <span id="adexp-date">&nbsp;&nbsp; Month: <input type="text" name="adexp-mo" id="adexp-mo" size="2" value="<?php if ($endmonth!='') { echo $endmonth; } else { echo date('m'); } ?>" /> Day: <input type="text" name="adexp-day" id="adexp-day" size="2" value="<?php if ($endday!='') { echo $endday; } else {  echo date('d'); } ?>" /> Year: <input type="text" name="adexp-yr" id="adexp-yr" size="4" value="<?php if ($endyear!='') { echo $endyear; } else {  echo date('Y'); } ?>" /> <?php if ($_GET['editad']!='') { ?><br /> &nbsp;&nbsp; Use 00/00/0000 for manual removal.<?php } ?></span>
+ <span id="adexp-date">&nbsp;&nbsp; <?php _e('Month:', 'wp125'); ?> <input type="text" name="adexp-mo" id="adexp-mo" size="2" value="<?php if ($endmonth!='') { echo $endmonth; } else { echo date('m'); } ?>" /> <?php _e('Day:', 'wp125'); ?> <input type="text" name="adexp-day" id="adexp-day" size="2" value="<?php if ($endday!='') { echo $endday; } else {  echo date('d'); } ?>" /> <?php _e('Year:', 'wp125'); ?> <input type="text" name="adexp-yr" id="adexp-yr" size="4" value="<?php if ($endyear!='') { echo $endyear; } else {  echo date('Y'); } ?>" /> <?php if ($_GET['editad']!='') { ?><br /> &nbsp;&nbsp; <?php _e('Use 00/00/0000 for manual removal.', 'wp125'); ?><?php } ?></span>
 </td></tr>
 
 <?php if ($_GET['editad']=='') { ?><script type="text/javascript">
@@ -205,18 +205,18 @@ document.getElementById("adexp-date").style.display = "none";
 
 <?php if ($_GET['editad']=='') { ?>
 <tr valign="top">
-<th scope="row">Click Tracking</th>
-<td><input type="checkbox" name="countclicks" checked="checked" /> Count the number of times this ad is clicked</td>
+<th scope="row"><?php _e('Click Tracking', 'wp125'); ?></th>
+<td><input type="checkbox" name="countclicks" checked="checked" /> <?php _e('Count the number of times this ad is clicked', 'wp125'); ?></td>
 </tr>
 <?php } ?>
 
 <tr valign="top">
-<th scope="row">Ad Image</th>
+<th scope="row"><?php _e('Ad Image', 'wp125'); ?></th>
 <td><input name="adimage" type="text" id="adimage" value="<?php if ($editingad->image_url!='') { echo $editingad->image_url; } else { echo 'http://'; } ?>" size="40" /></td>
 </tr>
 
 </table>
-<p class="submit"><input type="submit" name="Submit" value="Save Ad" /> &nbsp; <?php if ($_GET['editad']!='') { ?><input type="submit" name="deletead" value="Delete Ad" /><?php } ?></p>
+<p class="submit"><input type="submit" name="Submit" value="<?php _e('Save Ad', 'wp125'); ?>" /> &nbsp; <?php if ($_GET['editad']!='') { ?><input type="submit" name="deletead" value="<?php _e('Delete Ad', 'wp125'); ?>" /><?php } ?></p>
 </form>
 <?php wp125_admin_page_footer(); ?>
 </div><?php
@@ -259,70 +259,70 @@ $setting_emailonexp = get_option("wp125_emailonexp");
 $setting_defaultad = get_option("wp125_defaultad");
 $setting_daysbeforeexp = get_option("wp125_daysbeforeexp");
 ?><div class="wrap">
-<h2>Settings</h2>
+<h2><?php _e('Settings', 'wp125'); ?></h2>
 <form method="post" action="admin.php?page=wp125_settings">
 <table class="form-table">
 
 <tr valign="top">
-<th scope="row">Ad Orientation</th>
+<th scope="row"><?php _e('Ad Orientation', 'wp125'); ?></th>
 <td><label for="adorient">
 <select name="adorient" id="adorient">
-<option <?php if ($setting_ad_orientation=='1c') { echo 'selected="selected"'; } ?> value="1c">One Column</option>
-<option <?php if ($setting_ad_orientation=='2c') { echo 'selected="selected"'; } ?> value="2c">Two Column</option>
+<option <?php if ($setting_ad_orientation=='1c') { echo 'selected="selected"'; } ?> value="1c"><?php _e('One Column', 'wp125'); ?></option>
+<option <?php if ($setting_ad_orientation=='2c') { echo 'selected="selected"'; } ?> value="2c"><?php _e('Two Column', 'wp125'); ?></option>
 </select></label>
-<br/>How many columns should the ads be displayed in?
+<br/><?php _e('How many columns should the ads be displayed in?', 'wp125'); ?>
 </td></tr>
 
 <tr valign="top">
-<th scope="row">Number of Ad Slots</th>
-<td><input name="numads" type="text" id="numads" value="<?php echo $setting_num_slots; ?>" size="2" /><br/>How many ads should be shown?</td>
+<th scope="row"><?php _e('Number of Ad Slots', 'wp125'); ?></th>
+<td><input name="numads" type="text" id="numads" value="<?php echo $setting_num_slots; ?>" size="2" /><br/><?php _e('How many ads should be shown?', 'wp125'); ?></td>
 </tr>
 
 <tr valign="top">
-<th scope="row">Ad Order</th>
+<th scope="row"><?php _e('Ad Order', 'wp125'); ?></th>
 <td><label for="adorder">
 <select name="adorder" id="adorder">
-<option selected="selected" value="normal" <?php if ($setting_ad_order=='normal') { echo 'selected="selected"'; } ?>>Normal</option>
-<option value="random" <?php if ($setting_ad_order=='random') { echo 'selected="selected"'; } ?>>Random</option>
+<option selected="selected" value="normal" <?php if ($setting_ad_order=='normal') { echo 'selected="selected"'; } ?>><?php _e('Normal', 'wp125'); ?></option>
+<option value="random" <?php if ($setting_ad_order=='random') { echo 'selected="selected"'; } ?>><?php _e('Random', 'wp125'); ?></option>
 </select></label>
 </td></tr>
 
 <tr valign="top">
-<th scope="row">Widget Title</th>
-<td><input name="widgettitle" type="text" id="widgettitle" value="<?php echo $setting_widget_title; ?>" size="50" /><br/>The title to be displayed in the widget. <em>(Leave blank to disable.)</em></td>
+<th scope="row"><?php _e('Widget Title', 'wp125'); ?></th>
+<td><input name="widgettitle" type="text" id="widgettitle" value="<?php echo $setting_widget_title; ?>" size="50" /><br/><?php _e('The title to be displayed in the widget.', 'wp125'); ?> <em><?php _e('(Leave blank to disable.)', 'wp125'); ?></em></td>
 </tr>
 
 <tr valign="top">
-<th scope="row">Ad Sales Page</th>
-<td><input name="salespage" type="text" id="salespage" value="<?php echo $setting_buyad_url; ?>" size="50" /><br/>Do you have a page with statistics and prices? <em>(Default Ads will link here.)</em></td>
+<th scope="row"><?php _e('Ad Sales Page', 'wp125'); ?></th>
+<td><input name="salespage" type="text" id="salespage" value="<?php echo $setting_buyad_url; ?>" size="50" /><br/><?php _e('Do you have a page with statistics and prices?', 'wp125'); ?> <em><?php _e('(Default Ads will link here.)', 'wp125'); ?></em></td>
 </tr>
 
 <tr valign="top">
-<th scope="row">Default Style</th>
-<td><input type="checkbox" name="defaultstyle" <?php if ($setting_disable_default_style=='') { echo 'checked="checked"'; } ?> /> Include default ad stylesheet? <br/>Leave checked unless you want to use your own CSS to style the ads. Refer to the documentation for further help.</td>
+<th scope="row"><?php _e('Default Style', 'wp125'); ?></th>
+<td><input type="checkbox" name="defaultstyle" <?php if ($setting_disable_default_style=='') { echo 'checked="checked"'; } ?> /> <?php _e('Include default ad stylesheet?', 'wp125'); ?> <br/><?php _e('Leave checked unless you want to use your own CSS to style the ads. Refer to the documentation for further help.', 'wp125'); ?></td>
 </tr>
 
 <tr valign="top">
-<th scope="row">Expiration Email</th>
-<td><input name="emailonexp" type="text" id="emailonexp" value="<?php echo $setting_emailonexp; ?>" size="50" /><br/>Enter your email address if you would like to be emailed when an ad expires. <em>(Leave blank to disable.)</em></td>
+<th scope="row"><?php _e('Expiration Email', 'wp125'); ?></th>
+<td><input name="emailonexp" type="text" id="emailonexp" value="<?php echo $setting_emailonexp; ?>" size="50" /><br/><?php _e('Enter your email address if you would like to be emailed when an ad expires.', 'wp125'); ?> <em><?php _e('(Leave blank to disable.)', 'wp125'); ?></em></td>
 </tr>
 
 <tr valign="top">
-<th scope="row">Pre-Expiration Email</th>
-<td>Remind me <input name="daysbeforeexp" type="text" id="daysbeforeexp" value="<?php echo $setting_daysbeforeexp; ?>" size="2" /> days before an ad expires. <em>(Emails will be sent to the address specified above).</em></td>
+<th scope="row"><?php _e('Pre-Expiration Email', 'wp125'); ?></th>
+<td><?php _e('Remind me', 'wp125'); ?> <input name="daysbeforeexp" type="text" id="daysbeforeexp" value="<?php echo $setting_daysbeforeexp; ?>" size="2" /> <?php _e('days before an ad expires.', 'wp125'); ?> <em><?php _e('(Emails will be sent to the address specified above.)', 'wp125'); ?></em></td>
 </tr>
 
 <tr valign="top">
-<th scope="row">Default Ad</th>
-<td><input name="defaultad" type="text" id="defaultad" value="<?php echo $setting_defaultad; ?>" size="50" /><br/>Which image should be shown as a placeholder when an ad slot is empty? (<a href="<?php echo wp125_get_plugin_dir('url').'/youradhere.jpg'; ?>">Default</a>)</td>
+<th scope="row"><?php _e('Default Ad', 'wp125'); ?></th>
+<td><input name="defaultad" type="text" id="defaultad" value="<?php echo $setting_defaultad; ?>" size="50" /><br/><?php _e('Which image should be shown as a placeholder when an ad slot is empty?', 'wp125'); ?> (<a href="<?php echo wp125_get_plugin_dir('url').'/youradhere.jpg'; ?>"><?php _e('Default', 'wp125'); ?></a>)</td>
 </tr>
 
 </table>
 <input name="issubmitted" type="hidden" value="yes" />
-<p class="submit"><input type="submit" name="Submit" value="Save Changes" /></p>
+<p class="submit"><input type="submit" name="Submit" value="<?php _e('Save Changes', 'wp125'); ?>" /></p>
 </form>
 <br/>
-<p>Your ads can be displayed using either the included widget, or by using the <strong>&lt;?php wp125_write_ads();  ?&gt;</strong> template tag. Also, you can display a single ad, without any formatting, using <strong>&lt;?php wp125_single_ad(<em>num</em>);  ?&gt;</strong>, where <em>num</em> is the number of the ad slot you wish to show. This is useful for cases where your theme prevents the default formatting from working properly, or where you wish to display your ads in an unforeseen manner.</p>
+<p><?php _e("Your ads can be displayed using either the included widget, or by using the <strong>&lt;?php wp125_write_ads();  ?&gt;</strong> template tag. Also, you can display a single ad, without any formatting, using <strong>&lt;?php wp125_single_ad(<em>num</em>);  ?&gt;</strong>, where <em>num</em> is the number of the ad slot you wish to show. This is useful for cases where your theme prevents the default formatting from working properly, or where you wish to display your ads in an unforeseen manner.", 'wp125'); ?></p>
 <?php wp125_admin_page_footer(); ?>
 </div><?php
 }
@@ -332,7 +332,7 @@ $setting_daysbeforeexp = get_option("wp125_daysbeforeexp");
 function wp125_admin_page_footer() {
 echo '<div style="margin-top:45px; font-size:0.87em;">';
 echo '<div style="float:right;"><a href="http://www.webmaster-source.com/donate/" title="Why should you donate a few dollars? Click to find out..."><img src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" alt="Donate" /></a></div>';
-echo '<div><a href="'.wp125_get_plugin_dir('url').'/readme.txt">Documentation</a> | <a href="http://www.webmaster-source.com/wp125-ad-plugin-wordpress/">WP125 Homepage</a></div>';
+echo '<div><a href="'.wp125_get_plugin_dir('url').'/readme.txt">'.__('Documentation', 'wp125').'</a> | <a href="http://www.webmaster-source.com/wp125-ad-plugin-wordpress/">'.__('WP125 Homepage', 'wp125').'</a></div>';
 echo '</div>';
 }
 
