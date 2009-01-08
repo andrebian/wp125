@@ -65,7 +65,7 @@ function wp125_write_ads_widget($args) {
 //Add the Admin Menus
 if (is_admin()) {
 	function wp125_add_admin_menu() {
-		load_plugin_textdomain('wp125');
+		load_plugin_textdomain('wp125', PLUGINDIR.'/'.dirname(plugin_basename(__FILE__)).'/translations', dirname(plugin_basename(__FILE__)).'/translations');
 		add_menu_page("125x125 Ads", "Ads", MANAGEMENT_PERMISSION, __FILE__, "wp125_write_managemenu");
 		add_submenu_page(__FILE__, "Manage 125x125 Ads", "Manage", MANAGEMENT_PERMISSION, __FILE__, "wp125_write_managemenu");
 		add_submenu_page(__FILE__, "Add/Edit 125x125 Ads", "Add/Edit", MANAGEMENT_PERMISSION, 'wp125_addedit', "wp125_write_addeditmenu");
