@@ -133,7 +133,7 @@ for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
 $altclass = ( ' odd' != $altclass ) ? ' odd' : ' even';
 if (isset($adguidearray[$curslot])) {
 if ($adguidearray[$curslot]['clicks'] != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$adguidearray[$curslot]['id']; } else { $linkurl = $adguidearray[$curslot]['target']; }
-echo '<div class="wp125ad'.$altclass.'"><a href="'.$linkurl.'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>'."\n";
+echo '<div class="wp125ad'.$altclass.'"><a href="'.$linkurl.'" title="'.$adguidearray[$curslot]['name'].'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>'."\n";
 } else { echo '<div class="wp125ad'.$altclass.'"><a href="'.$setting_buyad_url.'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$setting_defaultad.'" alt="" /></a></div>'."\n"; }
 }
 echo "</div>\n";
@@ -156,7 +156,7 @@ for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
 $altclass = ( ' odd' != $altclass ) ? ' odd' : ' even';
 if (isset($adguidearray[$curslot])) {
 if ($adguidearray[$curslot]['clicks'] != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$adguidearray[$curslot]['id']; } else { $linkurl = $adguidearray[$curslot]['target']; }
-echo '<div class="wp125ad'.$altclass.'"><a href="'.$linkurl.'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>'."\n";
+echo '<div class="wp125ad'.$altclass.'"><a href="'.$linkurl.'" title="'.$adguidearray[$curslot]['name'].'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$adguidearray[$curslot]['image_url'].'" alt="'.$adguidearray[$curslot]['name'].'" /></a></div>'."\n";
 } else { echo '<div class="wp125ad'.$altclass.'"><a href="'.$setting_buyad_url.'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$setting_defaultad.'" alt="" /></a></div>'."\n"; }
 }
 echo "</div>\n";
@@ -172,7 +172,7 @@ function wp125_single_ad($theslot) {
 	if ($thead) {
 		wp125_CheckAdDate($thead->end_date, $thead->id, $thead->pre_exp_email);
 		if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
-		echo '<a href="'.$linkurl.'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a>';
+		echo '<a href="'.$linkurl.'" title="'.$adguidearray[$curslot]['name'].'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a>';
 	} else { echo '<a href="'.get_option("wp125_buyad_url").'" rel="nofollow"><img src="'.get_option("wp125_defaultad").'" alt="Your Ad Here" /></a>'; }
 }
 
