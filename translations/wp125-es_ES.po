@@ -196,7 +196,7 @@ msgstr "Orientación de anuncios"
 
 #: adminmenus.php:270
 msgid "One Column"
-msgstr "Ana columna"
+msgstr "Una columna"
 
 #: adminmenus.php:271
 msgid "Two Column"
@@ -204,7 +204,7 @@ msgstr "Dos columnas"
 
 #: adminmenus.php:273
 msgid "How many columns should the ads be displayed in?"
-msgstr "¿Cuántas columnas se deben los anuncios visualizar adentro?"
+msgstr "¿Cuántas columnas se deben los anuncios será mostrado adentro?"
 
 #: adminmenus.php:277
 msgid "Number of Ad Slots"
@@ -237,85 +237,85 @@ msgstr "El título que se visualizará en la widget."
 #: adminmenus.php:292
 #: adminmenus.php:307
 msgid "(Leave blank to disable.)"
-msgstr ""
+msgstr "(Deje esto sitio en blanco para desactivar la opción.)"
 
 #: adminmenus.php:296
 msgid "Ad Sales Page"
-msgstr "Paginación de anuncios ventas"
+msgstr "Página de anuncios ventas"
 
 #: adminmenus.php:297
 msgid "Do you have a page with statistics and prices?"
-msgstr ""
+msgstr "¿Usted tiene un página con estadísticas y con precios?"
 
 #: adminmenus.php:297
 msgid "(Default Ads will link here.)"
-msgstr ""
+msgstr "Anuncios por defectos conectará aquí."
 
 #: adminmenus.php:301
 msgid "Default Style"
-msgstr ""
+msgstr "CSS por defecto"
 
 #: adminmenus.php:302
 msgid "Include default ad stylesheet?"
-msgstr ""
+msgstr "¿Incluya el stylesheet del anuncio por defecto?"
 
 #: adminmenus.php:302
 msgid "Leave checked unless you want to use your own CSS to style the ads. Refer to the documentation for further help."
-msgstr ""
+msgstr "Deje controlada a menos que usted quiera utilizar su propio CSS para diseñar los anuncios. Leído la documentación para ayuda adicional."
 
 #: adminmenus.php:306
 msgid "Expiration Email"
-msgstr ""
+msgstr "Email de la expiración"
 
 #: adminmenus.php:307
 msgid "Enter your email address if you would like to be emailed when an ad expires."
-msgstr ""
+msgstr "Inscriba su direccionamiento de correo electrónico si deseas ser notificado cuando expira un anuncio."
 
 #: adminmenus.php:311
 msgid "Pre-Expiration Email"
-msgstr ""
+msgstr "Email antes de la expiración"
 
 #: adminmenus.php:312
 msgid "Remind me"
-msgstr ""
+msgstr "Recuérdeme"
 
 #: adminmenus.php:312
 msgid "days before an ad expires."
-msgstr ""
+msgstr "días antes un anuncio expira."
 
 #: adminmenus.php:312
 msgid "(Emails will be sent to the address specified above.)"
-msgstr ""
+msgstr "(Mensajes será enviado a el direccionamiento escrito arriba.)"
 
 #: adminmenus.php:316
 msgid "Default Ad"
-msgstr ""
+msgstr "Anuncio por defecto"
 
 #: adminmenus.php:317
 msgid "Which image should be shown as a placeholder when an ad slot is empty?"
-msgstr ""
+msgstr "¿Qué imagen será mostrado por defecto cuando un sitio de anuncio es vacío?"
 
 #: adminmenus.php:317
 msgid "Default"
-msgstr ""
+msgstr "Imagen incluimos."
 
 #: adminmenus.php:322
 msgid "Save Changes"
-msgstr ""
+msgstr "Salve las opciones"
 
 #: adminmenus.php:325
 msgid "Your ads can be displayed using either the included widget, or by using the <strong>&lt;?php wp125_write_ads();  ?&gt;</strong> template tag. Also, you can display a single ad, without any formatting, using <strong>&lt;?php wp125_single_ad(<em>num</em>);  ?&gt;</strong>, where <em>num</em> is the number of the ad slot you wish to show. This is useful for cases where your theme prevents the default formatting from working properly, or where you wish to display your ads in an unforeseen manner."
-msgstr ""
+msgstr "Tu anuncios pueden ser visualizados usando el widget incluido o usando el <strong>&lt;?php wp125_write_ads();  ?&gt;</strong> template tag. Usted puede visualizar un solo anuncio (sin formatar) usando <strong>&lt;?php wp125_single_ad(<em>num</em>);  ?&gt;</strong>, reemplazas <em>num</em> por el número de un sitio de anuncio."
 
 #: adminmenus.php:335
 msgid "Documentation"
-msgstr ""
+msgstr "Documentación"
 
 #: adminmenus.php:335
 msgid "WP125 Homepage"
-msgstr ""
+msgstr "WP125 página de hogar"
 
 #: wp125.php:50
 msgid "WP125"
-msgstr ""
+msgstr "WP125"
 
