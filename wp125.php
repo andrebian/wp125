@@ -115,7 +115,6 @@ $adtable_name = $wpdb->prefix . "wp125_ads";
 if (!defined('ADLINK_EXTRA')) { define("ADLINK_EXTRA", ""); }
 if ($setting_ad_order == 'random') { $theorder = 'RAND() LIMIT '.$setting_num_slots; } else { $theorder = 'slot ASC'; }
 $theads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status = '1' AND slot NOT IN ($exclude) ORDER BY $theorder", ARRAY_A);
-if ($theads) {
 if ($setting_ad_orientation=='1c') {
 echo '<div id="wp125adwrap_1c">'."\n";
 $arraycount = 0;
@@ -161,7 +160,6 @@ echo '<div class="wp125ad'.$altclass.'"><a href="'.$linkurl.'" title="'.$adguide
 } else { echo '<div class="wp125ad'.$altclass.'"><a href="'.$setting_buyad_url.'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$setting_defaultad.'" alt="" /></a></div>'."\n"; }
 }
 echo "</div>\n";
-}
 }
 }
 
