@@ -75,6 +75,7 @@ echo '</tr>';
 
 echo '</tbody>
 </table>';
+echo '<br /><a href="'.wp125_get_plugin_dir('url').'/calendar.php"><img src="'.wp125_get_plugin_dir('url').'/ical.gif" alt="iCalendar" /></a>';
 wp125_admin_page_footer();
 echo '</div>';
 }
