@@ -5,7 +5,7 @@ header("Content-type: text/plain");
 
 echo "BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Matt Harzewski/iCalendar Demo//NONSGML v1.0//EN\n\n";
+PRODID:-//Matt Harzewski/WP125//NONSGML v1.0//EN\n\n";
 
 $adtable_name = $wpdb->prefix . "wp125_ads";
 $ads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status != '0' AND end_date != '00/00/0000' ORDER BY id DESC", OBJECT);
