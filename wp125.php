@@ -66,10 +66,10 @@ function wp125_write_ads_widget($args) {
 if (is_admin()) {
 	function wp125_add_admin_menu() {
 		load_plugin_textdomain('wp125', PLUGINDIR.'/'.dirname(plugin_basename(__FILE__)).'/translations', dirname(plugin_basename(__FILE__)).'/translations');
-		add_menu_page("125x125 Ads", "Ads", MANAGEMENT_PERMISSION, __FILE__, "wp125_write_managemenu");
-		add_submenu_page(__FILE__, "Manage 125x125 Ads", "Manage", MANAGEMENT_PERMISSION, __FILE__, "wp125_write_managemenu");
-		add_submenu_page(__FILE__, "Add/Edit 125x125 Ads", "Add/Edit", MANAGEMENT_PERMISSION, 'wp125_addedit', "wp125_write_addeditmenu");
-		add_submenu_page(__FILE__, "125x125 Ad Settings", "Settings", MANAGEMENT_PERMISSION, 'wp125_settings', "wp125_write_settingsmenu");
+		add_menu_page(__("125x125 Ads", 'wp125'), __("Ads", 'wp125'), MANAGEMENT_PERMISSION, __FILE__, "wp125_write_managemenu");
+		add_submenu_page(__FILE__, __("Manage 125x125 Ads", 'wp125'), __("Manage", 'wp125'), MANAGEMENT_PERMISSION, __FILE__, "wp125_write_managemenu");
+		add_submenu_page(__FILE__, __("Add/Edit 125x125 Ads", 'wp125'), __("Add/Edit", 'wp125'), MANAGEMENT_PERMISSION, 'wp125_addedit', "wp125_write_addeditmenu");
+		add_submenu_page(__FILE__, __("125x125 Ad Settings", 'wp125'), __("Settings", 'wp125'), MANAGEMENT_PERMISSION, 'wp125_settings', "wp125_write_settingsmenu");
 	}
 	//Include menus
 	require_once(dirname(__FILE__).'/adminmenus.php');
