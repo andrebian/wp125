@@ -330,6 +330,39 @@ $setting_daysbeforeexp = get_option("wp125_daysbeforeexp");
 
 
 
+//Add Dashboard Widget
+function wp125_dashboard_widget() {
+	echo '<table class="widefat">
+	<thead><tr>
+	<th scope="col">Slot</th>
+	<th scope="col">Name</th>
+	<th scope="col" class="num">Clicks</th>
+	<th scope="col">Start Date</th>
+	<th scope="col">End Date</th>
+	</tr></thead>
+	<tbody>';
+	global $wpdb;
+	$adtable_name = $wpdb->prefix . "wp125_ads";
+	$wp125db = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status != '0' ORDER BY id DESC", OBJECT);
+	if ($wp125db) {
+	foreach ($wp125db as $wp125db){
+	?>
+	<tr><td><?php echo $wp125db->slot; ?></td><td><strong><?php echo $wp125db->name; ?></strong></td><td class="num"><?php echo $wp125db->clicks; ?></td><td><?php echo $wp125db->start_date; ?></td><td><?php echo $wp125db->end_date; ?></td></tr>
+	<?php
+	}
+	} else { echo '<tr> <td colspan="8">'.__('No ads found.', 'wp125').'</td> </tr>'; }
+	echo '</tbody>
+	</table>
+	<br />';
+	echo '<a href="admin.php?page=wp125_addedit" class="button rbutton">Add New</a> &nbsp; <a href="admin.php?page=wp125/wp125.php" class="button rbutton">Manage</a> &nbsp; <a href="admin.php?page=wp125_settings" class="button rbutton">Settings</a>';
+}
+function wp125_dashboard_add_widget() {
+	wp_add_dashboard_widget('wp125_widget', '125x125 Ads', 'wp125_dashboard_widget');
+}
+add_action('wp_dashboard_setup', 'wp125_dashboard_add_widget' );
+
+
+
 function wp125_admin_page_footer() {
 echo '<div style="margin-top:45px; font-size:0.87em;">';
 echo '<div style="float:right;"><a href="http://www.webmaster-source.com/donate/" title="Why should you donate a few dollars? Click to find out..."><img src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" alt="Donate" /></a></div>';
