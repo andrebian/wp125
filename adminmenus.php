@@ -334,11 +334,11 @@ $setting_daysbeforeexp = get_option("wp125_daysbeforeexp");
 function wp125_dashboard_widget() {
 	echo '<table class="widefat">
 	<thead><tr>
-	<th scope="col">Slot</th>
-	<th scope="col">Name</th>
-	<th scope="col" class="num">Clicks</th>
-	<th scope="col">Start Date</th>
-	<th scope="col">End Date</th>
+	<th scope="col">'.__('Slot', 'wp125').'</th>
+	<th scope="col">'.__('Name', 'wp125').'</th>
+	<th scope="col" class="num">'.__('Clicks', 'wp125').'</th>
+	<th scope="col">'.__('Start Date', 'wp125').'</th>
+	<th scope="col">'.__('End Date', 'wp125').'</th>
 	</tr></thead>
 	<tbody>';
 	global $wpdb;
@@ -354,10 +354,10 @@ function wp125_dashboard_widget() {
 	echo '</tbody>
 	</table>
 	<br />';
-	echo '<a href="admin.php?page=wp125_addedit" class="button rbutton">Add New</a> &nbsp; <a href="admin.php?page=wp125/wp125.php" class="button rbutton">Manage</a> &nbsp; <a href="admin.php?page=wp125_settings" class="button rbutton">Settings</a>';
+	echo '<a href="admin.php?page=wp125_addedit" class="button rbutton">'.__('Add New', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125/wp125.php" class="button rbutton">'.__('Manage', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125_settings" class="button rbutton">'.__('Settings', 'wp125').'</a>';
 }
 function wp125_dashboard_add_widget() {
-	wp_add_dashboard_widget('wp125_widget', '125x125 Ads', 'wp125_dashboard_widget');
+	wp_add_dashboard_widget('wp125_widget', __('125x125 Ads', 'wp125'), 'wp125_dashboard_widget');
 }
 add_action('wp_dashboard_setup', 'wp125_dashboard_add_widget' );
 
