@@ -166,6 +166,7 @@ echo "</div>\n";
 
 function wp125_single_ad($theslot) {
 	global $wpdb;
+	if (!defined('ADLINK_EXTRA')) { define("ADLINK_EXTRA", ""); }
 	$adtable_name = $wpdb->prefix . "wp125_ads";
 	$thead = $wpdb->get_row("SELECT * FROM $adtable_name WHERE slot = '$theslot' AND status = '1' ORDER BY id DESC", OBJECT);
 	if ($thead) {
