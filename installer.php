@@ -4,7 +4,7 @@ require_once(ABSPATH . 'wp-admin/upgrade.php');
 //***Installer variables***
 global $wpdb;
 $table_name = $wpdb->prefix . "wp125_ads";
-$wp125_db_version = "1.33671";
+$wp125_db_version = "1.33673";
 //***Installer***
 if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
 $sql = "CREATE TABLE " . $table_name . " (

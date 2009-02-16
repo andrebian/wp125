@@ -369,7 +369,7 @@ add_action('wp_dashboard_setup', 'wp125_dashboard_add_widget' );
 
 function wp125_admin_page_footer() {
 echo '<div style="margin-top:45px; font-size:0.87em;">';
-echo '<div style="float:right;"><a href="http://www.webmaster-source.com/donate/?plugin=wp125" title="Why should you donate a few dollars? Click to find out..."><img src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" alt="Donate" /></a></div>';
+echo '<div style="float:right;"><a href="http://www.webmaster-source.com/static/donate_plugin.php?plugin=wp125&amp;KeepThis=true&amp;TB_iframe=true&amp;height=250&amp;width=550" class="thickbox" title="Donate"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" alt="Donate" /></a></div>';
 echo '<div><a href="'.wp125_get_plugin_dir('url').'/readme.txt?KeepThis=true&amp;TB_iframe=true&amp;height=450&amp;width=680" class="thickbox" title="Documentation">'.__('Documentation', 'wp125').'</a> | <a href="http://www.webmaster-source.com/wp125-ad-plugin-wordpress/">'.__('WP125 Homepage', 'wp125').'</a></div>';
 echo '</div>';
 }
