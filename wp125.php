@@ -5,7 +5,7 @@ Plugin URI: http://www.webmaster-source.com/wp125-ad-plugin-wordpress/
 Description: Easily manage 125x125 ads within your WordPress Dashboard.
 Author: Matt Harzewski (redwall_hp)
 Author URI: http://www.webmaster-source.com
-Version: 1.3.0
+Version: 1.3.1
 */
 
 
@@ -103,9 +103,9 @@ function wp125_CheckAdDate($thedate, $theid, $pre_exp_email) {
 
 
 //Write the Ads
-function wp125_write_ads($exclude) {
+function wp125_write_ads($exclude="0") {
 global $wpdb;
-if (!isset($exclude)) { $exclude = "0"; } else { $exclude = implode(",", $exclude); }
+if ($exclude != "0") { $exclude = implode(",", $exclude); }
 $setting_ad_orientation = get_option("wp125_ad_orientation");
 $setting_num_slots = get_option("wp125_num_slots");
 $setting_ad_order = get_option("wp125_ad_order");
