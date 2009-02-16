@@ -5,8 +5,8 @@ Author URI: http://www.webmaster-source.com
 Donate link: http://www.webmaster-source.com/donate/?plugin=wp125
 Tags: ads, 125x125, management, advertisement
 Requires at least: 2.3
-Tested up to: 2.7
-Stable tag: 1.2.2
+Tested up to: 2.7.1
+Stable tag: 1.3.0
 
 Easy management of 125x125 ads on your blog.  Ads can be run for a specified number of days, and will automatically be taken down. Track clicks too.
 
@@ -74,6 +74,11 @@ First, uncheck the Default Style box on the Settings page. This will remove the 
 = How do I make the ads open in a new window? =
 If you absolutely *must* have your ads open in a new window when clicked, open the wp125.php file and find the `define(...` line near the top and remove the first `//` from the beginning.
 
+= My ads don't appear in two columns, even though I have the option set! How do I fix this? =
+The parent DIV that the ad code is inside probably isn't wide enough. You really need a *minimum* of 300px of horizontal space to have two ad columns, more if you use the default CSS. You could try reducing the CSS padding around the ads from 10px to something lower.
+
+`#wp125adwrap_2c .wp125ad { padding:4px; }`
+
 
 
 == Screenshots ==
@@ -94,4 +99,6 @@ If you're having a problem with the plugin, try posting on the official WordPres
 
 == Version History ==
 * 1.0.0 - Initial release
-* 1.1.0 - Some security and performance fixes, adds several new customization options and a few major features.
+* 1.1.x - Some security and performance fixes, adds several new customization options and a few major features.
+* 1.2.x - Added new features: Recieve email notifications in advance of ads expiring, alternating CSS classes on ads, and open ads in new windows if you absolutely *must.*
+* 1.3.x - Localization support (with French and Spanish to start), iCalendar subscription of ad expirations, WP Dashboard widget. Fixed errant "ADLINK_EXTRA"s in Single ads, fixed "no ads, no placeholders" bug, etc..
