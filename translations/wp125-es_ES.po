@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp125\n"
 "POT-Creation-Date: 2009-02-01 21:41+0000\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Matt Harzewski (redwall_hp) <matt@webmaster-source.com>\n"
+"Last-Translator: Rudy Girón <rudygiron@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,11 +15,11 @@ msgstr ""
 
 #: adminmenus.php:6
 msgid "Manage Ads"
-msgstr "Editar Anuncios"
+msgstr "Administrar anuncios"
 
 #: adminmenus.php:11
 msgid "Are you sure you want to deactivate the ad?"
-msgstr "¿Está usted seguro usted quiere desactivar el anuncio?"
+msgstr "¿Está seguro que quiere desactivar el anuncio?"
 
 #: adminmenus.php:11
 #: adminmenus.php:24
@@ -35,35 +35,35 @@ msgstr "No"
 
 #: adminmenus.php:18
 msgid "Ad deactivated."
-msgstr "Desactivé el anuncio"
+msgstr "Anuncio desactivado"
 
 #: adminmenus.php:24
 msgid "Are you sure you want to reactivate the ad?"
-msgstr "¿Está usted seguro usted quiere reactivar el anuncio?"
+msgstr "¿Está seguro que quiere reactivar el anuncio?"
 
 #: adminmenus.php:31
 msgid "Ad activated."
-msgstr "Activé el anuncio"
+msgstr "Anuncio activado"
 
 #: adminmenus.php:35
 msgid "Active Ads"
-msgstr "Anuncios en actividad"
+msgstr "Anuncios activos"
 
 #: adminmenus.php:35
 msgid "Inactive Ads"
-msgstr "Anuncios no en actividad"
+msgstr "Anuncios desactivados"
 
 #: adminmenus.php:39
 #: adminmenus.php:159
 #: adminmenus.php:337
 msgid "Slot"
-msgstr "Sitio de ad"
+msgstr "Posición del anuncios"
 
 #: adminmenus.php:40
 #: adminmenus.php:154
 #: adminmenus.php:338
 msgid "Name"
-msgstr "Nombre de el anuncio"
+msgstr "Nombre del anuncio"
 
 #: adminmenus.php:41
 #: adminmenus.php:339
@@ -83,7 +83,7 @@ msgstr "Fecha finalización"
 #: adminmenus.php:45
 #: adminmenus.php:357
 msgid "Add New"
-msgstr "Nuevo anuncio"
+msgstr "Agregar anuncio"
 
 #: adminmenus.php:62
 msgid "N/A"
@@ -104,7 +104,7 @@ msgstr "Desactivar"
 #: adminmenus.php:74
 #: adminmenus.php:353
 msgid "No ads found."
-msgstr "No anuncios encontrados."
+msgstr "Anuncios no encontrados."
 
 #: adminmenus.php:131
 msgid "Ad"
@@ -116,7 +116,7 @@ msgstr "actualizado."
 
 #: adminmenus.php:136
 msgid "Do you really want to delete this ad record? This action cannot be undone."
-msgstr "¿Usted quiere realmente suprimir este anuncio? Esta acción no puede ser deshecha."
+msgstr "¿Quiere realmente suprimir este anuncio? Esta acción no puede ser deshecha."
 
 #: adminmenus.php:142
 msgid "Ad deleted."
@@ -124,19 +124,19 @@ msgstr "Anuncio suprimido."
 
 #: adminmenus.php:146
 msgid "Add/Edit Ads"
-msgstr "Añadir y Editar Anuncios"
+msgstr "Agregar y editar Aanuncios"
 
 #: adminmenus.php:155
 msgid "Whose ad is this?"
-msgstr "¿De quién anuncio es éste?"
+msgstr "¿De quién es este anuncio?"
 
 #: adminmenus.php:169
 msgid "Target URL"
-msgstr "URL de la conexión"
+msgstr "URL para el anuncio"
 
 #: adminmenus.php:170
 msgid "Where should the ad link to?"
-msgstr "¿Dónde debe el anuncio conectar?"
+msgstr "¿A dónde debe el anuncio enlazar?"
 
 #: adminmenus.php:183
 msgid "Expiration"
@@ -169,17 +169,18 @@ msgstr "Día:"
 msgid "Year:"
 msgstr "Año:"
 
+# Remember that in Spanish the date is given as day/month/year. This field needs clarification as to what 00 means.
 #: adminmenus.php:193
 msgid "Use 00/00/0000 for manual removal."
 msgstr "Usar 00/00/0000 para el retiro manual."
 
 #: adminmenus.php:209
 msgid "Click Tracking"
-msgstr "Cuenta el numero de clic"
+msgstr "Conteo de clics"
 
 #: adminmenus.php:210
 msgid "Count the number of times this ad is clicked"
-msgstr "Cuente el número de épocas que se hace clic esta anuncio"
+msgstr "Cuente el número de veces que se hace clic sobre ek anuncio"
 
 #: adminmenus.php:215
 msgid "Ad Image"
@@ -187,11 +188,11 @@ msgstr "Imagen del anuncio"
 
 #: adminmenus.php:220
 msgid "Save Ad"
-msgstr "Salve el anuncio"
+msgstr "Guardar el anuncio"
 
 #: adminmenus.php:220
 msgid "Delete Ad"
-msgstr "Cancelación del anuncio"
+msgstr "Suprimir anuncio"
 
 #: adminmenus.php:263
 #: adminmenus.php:357
@@ -213,11 +214,11 @@ msgstr "Dos columnas"
 
 #: adminmenus.php:274
 msgid "How many columns should the ads be displayed in?"
-msgstr "¿Cuántas columnas se deben los anuncios será mostrado adentro?"
+msgstr "¿En cuántas columnas se deben mostrar los anuncios?"
 
 #: adminmenus.php:278
 msgid "Number of Ad Slots"
-msgstr "Número de sitios del anuncio"
+msgstr "Número de espacios publicitarios"
 
 #: adminmenus.php:279
 msgid "How many ads should be shown?"
@@ -233,7 +234,7 @@ msgstr "Normal"
 
 #: adminmenus.php:287
 msgid "Random"
-msgstr "Al azar"
+msgstr "Aleatorio"
 
 #: adminmenus.php:292
 msgid "Widget Title"
@@ -246,80 +247,80 @@ msgstr "El título que se visualizará en la widget."
 #: adminmenus.php:293
 #: adminmenus.php:308
 msgid "(Leave blank to disable.)"
-msgstr "(Deje esto sitio en blanco para desactivar la opción.)"
+msgstr "(Deje esto espacio en blanco para desactivar la opción.)"
 
 #: adminmenus.php:297
 msgid "Ad Sales Page"
-msgstr "Página de anuncios ventas"
+msgstr "Página de anuncios en venta"
 
 #: adminmenus.php:298
 msgid "Do you have a page with statistics and prices?"
-msgstr "¿Usted tiene un página con estadísticas y con precios?"
+msgstr "¿Tiene un página con estadísticas y precios?"
 
 #: adminmenus.php:298
 msgid "(Default Ads will link here.)"
-msgstr "Anuncios por defectos conectará aquí."
+msgstr "Anuncios por defecto se enlazan aquí."
 
 #: adminmenus.php:302
 msgid "Default Style"
-msgstr "CSS por defecto"
+msgstr "Estilo CSS predeterminado"
 
 #: adminmenus.php:303
 msgid "Include default ad stylesheet?"
-msgstr "¿Incluya el stylesheet del anuncio por defecto?"
+msgstr "¿Incluya hoja de estilos predeterminada?"
 
 #: adminmenus.php:303
 msgid "Leave checked unless you want to use your own CSS to style the ads. Refer to the documentation for further help."
-msgstr "Deje controlada a menos que usted quiera utilizar su propio CSS para diseñar los anuncios. Leído la documentación para ayuda adicional."
+msgstr "Deje esta opción marcada a menos que quiera utilizar su propia hoja de estilos. Refierase a la documentación para ayuda adicional."
 
 #: adminmenus.php:307
 msgid "Expiration Email"
-msgstr "Email de la expiración"
+msgstr "Dirección de correo para recibir las expiraciones"
 
 #: adminmenus.php:308
 msgid "Enter your email address if you would like to be emailed when an ad expires."
-msgstr "Inscriba su direccionamiento de correo electrónico si deseas ser notificado cuando expira un anuncio."
+msgstr "Inscriba su dirección de correo electrónico si desea ser notificado cuando un anuncio expira ."
 
 #: adminmenus.php:312
 msgid "Pre-Expiration Email"
-msgstr "Email antes de la expiración"
+msgstr "Enviar correo antes de la expiración"
 
 #: adminmenus.php:313
 msgid "Remind me"
-msgstr "Recuérdeme"
+msgstr "Recordarme "
 
 #: adminmenus.php:313
 msgid "days before an ad expires."
-msgstr "días antes un anuncio expira."
+msgstr "días antes que un anuncio expire."
 
 #: adminmenus.php:313
 msgid "(Emails will be sent to the address specified above.)"
-msgstr "(Mensajes será enviado a el direccionamiento escrito arriba.)"
+msgstr "(Los mensajes serán enviados a la dirección de correo escrita arriba.)"
 
 #: adminmenus.php:317
 msgid "Default Ad"
-msgstr "Anuncio por defecto"
+msgstr "Anuncio predeterminado"
 
 #: adminmenus.php:318
 msgid "Which image should be shown as a placeholder when an ad slot is empty?"
-msgstr "¿Qué imagen será mostrado por defecto cuando un sitio de anuncio es vacío?"
+msgstr "¿Qué imagen será mostrada cuando una posición de anuncio está vacia?"
 
 #: adminmenus.php:318
 msgid "Default"
-msgstr "Imagen incluimos."
+msgstr "Imagen predeterminada."
 
 #: adminmenus.php:323
 msgid "Save Changes"
-msgstr "Salve las opciones"
+msgstr "Guarde los cambios"
 
 #: adminmenus.php:326
 msgid "Your ads can be displayed using either the included widget, or by using the <strong>&lt;?php wp125_write_ads();  ?&gt;</strong> template tag. Also, you can display a single ad, without any formatting, using <strong>&lt;?php wp125_single_ad(<em>num</em>);  ?&gt;</strong>, where <em>num</em> is the number of the ad slot you wish to show. This is useful for cases where your theme prevents the default formatting from working properly, or where you wish to display your ads in an unforeseen manner."
-msgstr "Tu anuncios pueden ser visualizados usando el widget incluido o usando el <strong>&lt;?php wp125_write_ads();  ?&gt;</strong> template tag. Usted puede visualizar un solo anuncio (sin formatar) usando <strong>&lt;?php wp125_single_ad(<em>num</em>);  ?&gt;</strong>, reemplazas <em>num</em> por el número de un sitio de anuncio."
+msgstr "Sus anuncios pueden ser mostrados usando el widget incluído o usando el <strong>&lt;?php wp125_write_ads();  ?&gt;</strong> etiqueta de plantilla. Puede mostrar un solo anuncio (sin ningún formato) usando <strong>&lt;?php wp125_single_ad(<em>num</em>);  ?&gt;</strong>, dónde <em>num</em> es número de la posición del anuncio."
 
 #: adminmenus.php:357
 #: wp125.php:70
 msgid "Manage"
-msgstr "Editar Anuncios"
+msgstr "Administración de anuncios"
 
 #: adminmenus.php:360
 #: wp125.php:69
@@ -332,7 +333,7 @@ msgstr "Documentación"
 
 #: adminmenus.php:369
 msgid "WP125 Homepage"
-msgstr "WP125 página de hogar"
+msgstr "Página principal de WP125"
 
 #: wp125.php:50
 msgid "WP125"
@@ -344,17 +345,17 @@ msgstr "Anuncios"
 
 #: wp125.php:70
 msgid "Manage 125x125 Ads"
-msgstr "Editar Anuncios"
+msgstr "Administración de anuncios"
 
 #: wp125.php:71
 msgid "Add/Edit 125x125 Ads"
-msgstr "Añadir y Editar Anuncios"
+msgstr "Agregar y editar anuncios"
 
 #: wp125.php:71
 msgid "Add/Edit"
-msgstr "Añadir y Editar"
+msgstr "Agregar y editar"
 
 #: wp125.php:72
 msgid "125x125 Ad Settings"
-msgstr "Opciones de Anuncios"
+msgstr "Opciones de anuncios"
 
