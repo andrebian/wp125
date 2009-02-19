@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp125\n"
 "POT-Creation-Date: 2009-02-01 21:41+0000\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Rudy Girón <rudygiron@gmail.com>\n"
+"Last-Translator: Matt Harzewski (redwall_hp) <matt@webmaster-source.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -172,7 +172,7 @@ msgstr "Año:"
 # Remember that in Spanish the date is given as day/month/year. This field needs clarification as to what 00 means.
 #: adminmenus.php:193
 msgid "Use 00/00/0000 for manual removal."
-msgstr "Usar 00/00/0000 para el retiro manual."
+msgstr "Usar 00/00/0000 para el retiro manual. (El mes, el dia, el año.)"
 
 #: adminmenus.php:209
 msgid "Click Tracking"
