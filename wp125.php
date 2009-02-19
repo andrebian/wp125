@@ -119,6 +119,7 @@ $theads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status = '1' $ex
 if ($setting_ad_orientation=='1c') {
 echo '<div id="wp125adwrap_1c">'."\n";
 $arraycount = 0;
+if ($theads) {
 foreach ($theads as $thead){
 wp125_CheckAdDate($thead['end_date'], $thead['id'], $thead['pre_exp_email']);
 $theslot = $thead['slot'];
@@ -129,6 +130,7 @@ if ($setting_ad_order == 'random') {
 srand((float)microtime() * 1000000);
 shuffle($adguidearray);
 $adguidearray_shufflefix = $adguidearray[0]; $adguidearray[0]=''; $adguidearray[]=$adguidearray_shufflefix;
+}
 }
 for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
 $altclass = ( ' odd' != $altclass ) ? ' odd' : ' even';
@@ -142,6 +144,7 @@ echo "</div>\n";
 if ($setting_ad_orientation=='2c') {
 echo '<div id="wp125adwrap_2c">'."\n";
 $arraycount = 0;
+if ($theads) {
 foreach ($theads as $thead){
 wp125_CheckAdDate($thead['end_date'], $thead['id'], $thead['pre_exp_email']);
 $theslot = $thead['slot'];
@@ -152,6 +155,7 @@ if ($setting_ad_order == 'random') {
 srand((float)microtime() * 1000000);
 shuffle($adguidearray);
 $adguidearray_shufflefix = $adguidearray[0]; $adguidearray[0]=''; $adguidearray[]=$adguidearray_shufflefix;
+}
 }
 for ($curslot=1; $curslot <= $setting_num_slots; $curslot++) {
 $altclass = ( ' odd' != $altclass ) ? ' odd' : ' even';
