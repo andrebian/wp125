@@ -172,7 +172,7 @@ msgstr "Año:"
 # Remember that in Spanish the date is given as day/month/year. This field needs clarification as to what 00 means.
 #: adminmenus.php:193
 msgid "Use 00/00/0000 for manual removal."
-msgstr "Usar 00/00/0000 para el retiro manual. (El mes, el dia, el año.)"
+msgstr "Usar 00/00/0000 para el retiro manual. Ingresar fecha como mes, día, año."
 
 #: adminmenus.php:209
 msgid "Click Tracking"
