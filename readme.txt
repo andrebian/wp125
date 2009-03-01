@@ -75,7 +75,7 @@ First, uncheck the Default Style box on the Settings page. This will remove the 
 If you absolutely *must* have your ads open in a new window when clicked, open the wp125.php file and find the `define(...` line near the top and remove the first `//` from the beginning.
 
 = My ads don't appear in two columns, even though I have the option set! How do I fix this? =
-The parent DIV that the ad code is inside probably isn't wide enough. You really need a *minimum* of 300px of horizontal space to have two ad columns, more if you use the default CSS. You could try reducing the CSS padding around the ads from 10px to something lower.
+The parent DIV that the ad code is inside probably isn't wide enough. You really need a *minimum* of 250px of horizontal space to have two ad columns, more if you use the default CSS. You could try reducing the CSS padding around the ads from 10px to something lower.
 
 `#wp125adwrap_2c .wp125ad { padding:4px; }`
 

@@ -119,7 +119,7 @@ $theads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status = '1' $ex
 if ($setting_ad_orientation=='1c') {
 echo '<div id="wp125adwrap_1c">'."\n";
 $arraycount = 0;
-if ($theads) {
+if (!empty($theads)) {
 foreach ($theads as $thead){
 wp125_CheckAdDate($thead['end_date'], $thead['id'], $thead['pre_exp_email']);
 $theslot = $thead['slot'];
@@ -144,7 +144,7 @@ echo "</div>\n";
 if ($setting_ad_orientation=='2c') {
 echo '<div id="wp125adwrap_2c">'."\n";
 $arraycount = 0;
-if ($theads) {
+if (!empty($theads)) {
 foreach ($theads as $thead){
 wp125_CheckAdDate($thead['end_date'], $thead['id'], $thead['pre_exp_email']);
 $theslot = $thead['slot'];

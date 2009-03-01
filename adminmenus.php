@@ -361,7 +361,9 @@ function wp125_dashboard_widget() {
 	echo '<a href="admin.php?page=wp125_addedit" class="button rbutton">'.__('Add New', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125/wp125.php" class="button rbutton">'.__('Manage', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125_settings" class="button rbutton">'.__('Settings', 'wp125').'</a>';
 }
 function wp125_dashboard_add_widget() {
-	wp_add_dashboard_widget('wp125_widget', __('125x125 Ads', 'wp125'), 'wp125_dashboard_widget');
+	if (current_user_can(MANAGEMENT_PERMISSION)) {
+		wp_add_dashboard_widget('wp125_widget', __('125x125 Ads', 'wp125'), 'wp125_dashboard_widget');
+	}
 }
 add_action('wp_dashboard_setup', 'wp125_dashboard_add_widget' );
 
