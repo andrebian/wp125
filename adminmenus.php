@@ -1,8 +1,10 @@
 <?php
 
-wp_enqueue_script('jquery');
-wp_enqueue_script('thickbox');
-wp_enqueue_style('thickbox');
+if (function_exists('wp_enqueue_style')) {
+	wp_enqueue_script('jquery');
+	wp_enqueue_script('thickbox');
+	wp_enqueue_style('thickbox');
+}
 
 //Write Manage Menu
 function wp125_write_managemenu() {
@@ -365,7 +367,7 @@ function wp125_dashboard_add_widget() {
 		wp_add_dashboard_widget('wp125_widget', __('125x125 Ads', 'wp125'), 'wp125_dashboard_widget');
 	}
 }
-add_action('wp_dashboard_setup', 'wp125_dashboard_add_widget' );
+if (!function_exists('wp_add_dashboard_widget')) { add_action('wp_dashboard_setup', 'wp125_dashboard_add_widget' ); }
 
 
 
