@@ -364,10 +364,12 @@ function wp125_dashboard_widget() {
 }
 function wp125_dashboard_add_widget() {
 	if (current_user_can(MANAGEMENT_PERMISSION)) {
-		wp_add_dashboard_widget('wp125_widget', __('125x125 Ads', 'wp125'), 'wp125_dashboard_widget');
+		if (function_exists('wp_add_dashboard_widget')) {
+			wp_add_dashboard_widget('wp125_widget', __('125x125 Ads', 'wp125'), 'wp125_dashboard_widget');
+		}
 	}
 }
-if (!function_exists('wp_add_dashboard_widget')) { add_action('wp_dashboard_setup', 'wp125_dashboard_add_widget' ); }
+add_action('wp_dashboard_setup', 'wp125_dashboard_add_widget' );
 
 
 
