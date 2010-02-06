@@ -5,7 +5,7 @@ Author URI: http://www.webmaster-source.com
 Donate link: http://www.webmaster-source.com/donate/?plugin=wp125
 Tags: ads, 125x125, management, advertisement
 Requires at least: 2.3
-Tested up to: 2.8
+Tested up to: 2.9.1
 Stable tag: 1.3.8
 
 Easy management of 125x125 ads on your blog.  Ads can be run for a specified number of days, and will automatically be taken down. Track clicks too.
