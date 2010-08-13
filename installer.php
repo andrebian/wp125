@@ -1,6 +1,11 @@
 <?php
 //***** Installer *****
-require_once(ABSPATH . 'wp-admin/upgrade.php');
+global $wp_version;
+if (version_compare($wp_version, '3.0', '<')) {
+	require_once(ABSPATH . 'wp-admin/upgrade.php');
+} else {
+	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+}
 //***Installer variables***
 global $wpdb;
 $table_name = $wpdb->prefix . "wp125_ads";
