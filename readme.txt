@@ -105,6 +105,7 @@ If you're having a problem with the plugin, try posting on the official WordPres
 * Simplified Chinese Translation: [Sam Zuo](http://bwskyer.com/)
 * Dutch Translation: Jackey van Melis
 * Brasilian Portuguese Translation: José de Menezes Filho
+* German Translation: Simon Kraft
 
 
 
@@ -117,3 +118,4 @@ If you're having a problem with the plugin, try posting on the official WordPres
 * 1.3.8 - Added zh_CN translation
 * 1.3.9 - Changed SQL query on 131 of adminmenus.php to fix bug where ads are not inserted in some situations. Added Dutch and Brasilian Portuguese translation files.
 * 1.4.0 - Now with WordPress 3.0 support!
+* 1.4.1 - Added German translation.
