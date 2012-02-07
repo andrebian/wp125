@@ -13,6 +13,10 @@ Version: 1.4.1
 define("MANAGEMENT_PERMISSION", "edit_themes"); //The minimum privilege required to manage ads. http://tinyurl.com/wpprivs
 
 
+//Includes
+include "widget_class.php";
+
+
 //Ad Click Redirect
 add_action('init', 'wp125_adclick');
 function wp125_adclick() {
@@ -48,16 +52,7 @@ register_activation_hook(__FILE__,'wp125_install');
 
 //Create Widget
 function wp125_create_ad_widget() {
-	register_sidebar_widget(__('WP125'), 'wp125_write_ads_widget');
-}
-function wp125_write_ads_widget($args) {
-	extract($args);
-	echo $before_widget;
-	if (get_option("wp125_widget_title")!='') {
-		echo "\n".$before_title; echo get_option("wp125_widget_title"); echo $after_title;
-	}
-	wp125_write_ads();
-	echo $after_widget;
+	register_widget('WP125_Widget');
 }
 
 
@@ -234,7 +229,7 @@ add_filter('favorite_actions', 'wp125_add_menu_favorite'); //Favorites Menu
 
 
 //Hooks
-add_action("plugins_loaded", "wp125_create_ad_widget"); //Create the Widget
+add_action("widgets_init", "wp125_create_ad_widget"); //Create the Widget
 if (is_admin()) { add_action('admin_menu', 'wp125_add_admin_menu'); } //Admin pages
 
 
