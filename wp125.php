@@ -5,7 +5,7 @@ Plugin URI: http://www.webmaster-source.com/wp125-ad-plugin-wordpress/
 Description: Easily manage 125x125 ads within your WordPress Dashboard.
 Author: Matt Harzewski (redwall_hp)
 Author URI: http://www.webmaster-source.com
-Version: 1.4.3
+Version: 1.4.4
 */
 
 
@@ -97,6 +97,21 @@ function wp125_CheckAdDate($thedate, $theid, $pre_exp_email) {
 }
 
 
+function wp125_task_check_ad_expiry() {
+
+	global $wpdb;
+	$adtable_name = $wpdb->prefix . "wp125_ads";
+	$ads = $wpdb->get_results("SELECT * FROM $adtable_name WHERE status = '1'");
+
+	if ($ads) {
+		foreach ($ads as $key => $ad) {
+			wp125_CheckAdDate($ad->end_date, $ad->id, $ad->pre_exp_email);
+		}
+	}
+
+}
+
+
 
 //Write the Ads
 function wp125_write_ads($exclude="0") {
@@ -117,7 +132,6 @@ echo '<div id="wp125adwrap_1c">'."\n";
 $arraycount = 0;
 if (!empty($theads)) {
 foreach ($theads as $thead){
-wp125_CheckAdDate($thead['end_date'], $thead['id'], $thead['pre_exp_email']);
 $theslot = $thead['slot'];
 $adguidearray[$theslot] = $thead;
 $arraycount++;
@@ -231,6 +245,11 @@ add_filter('favorite_actions', 'wp125_add_menu_favorite'); //Favorites Menu
 //Hooks
 add_action("widgets_init", "wp125_create_ad_widget"); //Create the Widget
 if (is_admin()) { add_action('admin_menu', 'wp125_add_admin_menu'); } //Admin pages
+
+if (!wp_next_scheduled('wp125classic_cron_ad_expiry')) {
+	wp_schedule_event(time(), 'twicedaily', 'wp125classic_cron_ad_expiry');
+}
+add_action('wp125classic_cron_ad_expiry', 'wp125_task_check_ad_expiry');
 
 
 
