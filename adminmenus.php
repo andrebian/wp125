@@ -4,6 +4,7 @@ if (function_exists('wp_enqueue_style')) {
 	wp_enqueue_script('jquery');
 	wp_enqueue_script('thickbox');
 	wp_enqueue_style('thickbox');
+	wp_enqueue_script('media-upload');
 }
 
 //Write Manage Menu
@@ -13,27 +14,35 @@ echo '<div class="wrap">
 
 //Handle deactivations
 if ($_GET['wp125action'] == "deactivate") {
-$theid = $_GET['theid'];
+$theid = intval($_GET['theid']);
 echo '<div id="message" class="updated fade"><p>'.__('Are you sure you want to deactivate the ad?', 'wp125').' <a href="admin.php?page=wp125/wp125.php&wp125action=deactivateconf&theid='.$theid.'">'.__('Yes', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125/wp125.php">'.__('No!', 'wp125').'</a></p></div>';
 }
 if ($_GET['wp125action'] == "deactivateconf") {
-$theid = $_GET['theid'];
+$theid = intval($_GET['theid']);
 global $wpdb, $table_prefix;
 $adtable_name = $wpdb->prefix . "wp125_ads";
-$wpdb->query("UPDATE $adtable_name SET status = '0' WHERE id = '$theid'");
+$wpdb->update(
+	$adtable_name,
+	array('status' => '0'),
+	array('id' => $theid)
+);
 echo '<div id="message" class="updated fade"><p>'.__('Ad deactivated.', 'wp125').'</p></div>';
 }
 
 //Handle REactivations
 if ($_GET['wp125action'] == "activate") {
-$theid = $_GET['theid'];
+$theid = intval($_GET['theid']);
 echo '<div id="message" class="updated fade"><p>'.__('Are you sure you want to reactivate the ad?', 'wp125').' <a href="admin.php?page=wp125/wp125.php&showmanage=inactive&wp125action=activateconf&theid='.$theid.'">'.__('Yes', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125/wp125.php&showmanage=inactive">'.__('No!', 'wp125').'</a></p></div>';
 }
 if ($_GET['wp125action'] == "activateconf") {
-$theid = $_GET['theid'];
+$theid = intval($_GET['theid']);
 global $wpdb, $table_prefix;
 $adtable_name = $wpdb->prefix . "wp125_ads";
-$wpdb->query("UPDATE $adtable_name SET status = '1' AND pre_exp_email='0' WHERE id = '$theid'");
+$wpdb->update(
+	$adtable_name,
+	array('status' => '1', 'pre_exp_email' => '0'),
+	array('id' => $theid)
+);
 echo '<div id="message" class="updated fade"><p>'.__('Ad activated.', 'wp125').'</p></div>';
 }
 
@@ -101,8 +110,11 @@ $setting_emailonexp = get_option("wp125_emailonexp");
 $setting_defaultad = get_option("wp125_defaultad");
 //If post is being edited, grab current info
 if ($_GET['editad']!='') {
-$theid = $_GET['editad'];
-$editingad = $wpdb->get_row("SELECT * FROM $adtable_name WHERE id = '$theid'", OBJECT);
+$theid = intval($_GET['editad']);
+$editingad = $wpdb->get_row($wpdb->prepare(
+	"SELECT * FROM {$adtable_name} WHERE id = %d",
+	$theid
+));
 }
 ?><div class="wrap">
 
@@ -142,7 +154,7 @@ $post_editedad = $wpdb->escape($_POST['editedad']);
 echo '<div id="message" class="updated fade"><p>'.__('Do you really want to delete this ad record? This action cannot be undone.', 'wp125').' <a href="admin.php?page=wp125_addedit&deletead='.$post_editedad.'">'.__('Yes', 'wp125').'</a> &nbsp; <a href="admin.php?page=wp125_addedit&editad='.$post_editedad.'">'.__('No!', 'wp125').'</a></p></div>';
 }
 if ($_GET['deletead']!='') {
-$thead=$_GET['deletead'];
+$thead = intval($_GET['deletead']);
 $updatedb = "DELETE FROM $adtable_name WHERE id='$thead'";
 $results = $wpdb->query($updatedb);
 echo '<div id="message" class="updated fade"><p>'.__('Ad deleted.', 'wp125').'</p></div>';
@@ -154,7 +166,7 @@ echo '<div id="message" class="updated fade"><p>'.__('Ad deleted.', 'wp125').'</
 <form method="post" action="admin.php?page=wp125_addedit">
 <table class="form-table">
 
-<?php if ($_GET['editad']!='') { echo '<input name="editedad" type="hidden" value="'.$_GET['editad'].'" />'; } ?>
+<?php if ($_GET['editad']!='') { echo '<input name="editedad" type="hidden" value="'.intval($_GET['editad']).'" />'; } ?>
 
 <tr valign="top">
 <th scope="row"><?php _e('Name', 'wp125'); ?></th>
@@ -219,8 +231,24 @@ document.getElementById("adexp-date").style.display = "none";
 
 <tr valign="top">
 <th scope="row"><?php _e('Ad Image', 'wp125'); ?></th>
-<td><input name="adimage" type="text" id="adimage" value="<?php if ($editingad->image_url!='') { echo $editingad->image_url; } else { echo 'http://'; } ?>" size="40" /></td>
+<td><input name="adimage" type="text" id="adimage" value="<?php if ($editingad->image_url!='') { echo $editingad->image_url; } else { echo 'http://'; } ?>" size="40" /> <input id="upload_image_button" type="button" class="button" value="Upload Image" /></td>
 </tr>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	jQuery('#upload_image_button').click(function() {
+		formfield = jQuery('#adimage').attr('name');
+		tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
+		return false;
+	});
+
+	window.send_to_editor = function(html) {
+		imgurl = jQuery('img',html).attr('src');
+		jQuery('#adimage').val(imgurl);
+		tb_remove();
+	}
+});
+</script>
 
 </table>
 <p class="submit"><input type="submit" name="Submit" value="<?php _e('Save Ad', 'wp125'); ?>" /> &nbsp; <?php if ($_GET['editad']!='') { ?><input type="submit" name="deletead" value="<?php _e('Delete Ad', 'wp125'); ?>" /><?php } ?></p>

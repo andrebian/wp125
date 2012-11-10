@@ -24,7 +24,11 @@ function wp125_adclick() {
 	$theid = $_GET['adclick'];
 	global $wpdb;
 	$adtable_name = $wpdb->prefix . "wp125_ads";
-	$thead = $wpdb->get_row("SELECT target FROM $adtable_name WHERE id = '$theid'", OBJECT);
+	$thead = $wpdb->get_row($wpdb->prepare(
+ 		"SELECT target FROM {$adtable_name} WHERE id = %d",
+ 		$theid
+	));
+	$theid = $wpdb->escape($theid);
 	$update = "UPDATE ". $adtable_name ." SET clicks=clicks+1 WHERE id='$theid'";
 	$results = $wpdb->query( $update );
 	header("Location: $thead->target");
