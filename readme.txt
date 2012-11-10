@@ -6,7 +6,7 @@ Donate link: http://www.webmaster-source.com/donate/?plugin=wp125
 Tags: ads, 125x125, management, advertisement
 Requires at least: 2.8
 Tested up to: 3.4.2
-Stable tag: 1.4.4
+Stable tag: 1.4.5
 
 Easy management of 125x125 ads on your blog.  Ads can be run for a specified number of days, and will automatically be taken down. Track clicks too.
 
@@ -123,3 +123,4 @@ If you're having a problem with the plugin, try posting on the official WordPres
 * 1.4.2 - Now with support for multiple widgets!
 * 1.4.3 - Added Romanian translation.
 * 1.4.4 - Fixed a race condition that could cause many duplicate expiration emails to be sent on high-traffic sites.
+* 1.4.5 - Added uploader, plus fixed some potential vulnerabilities.
