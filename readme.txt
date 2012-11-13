@@ -123,4 +123,4 @@ If you're having a problem with the plugin, try posting on the official WordPres
 * 1.4.2 - Now with support for multiple widgets!
 * 1.4.3 - Added Romanian translation.
 * 1.4.4 - Fixed a race condition that could cause many duplicate expiration emails to be sent on high-traffic sites.
-* 1.4.5 - Added uploader, plus fixed some potential vulnerabilities.
+* 1.4.5 - Added uploader, plus fixed some potential vulnerabilities. (Thanks to Charlie Eriksen via Secunia SVCRP.)
