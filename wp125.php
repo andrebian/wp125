@@ -160,7 +160,6 @@ echo '<div id="wp125adwrap_2c">'."\n";
 $arraycount = 0;
 if (!empty($theads)) {
 foreach ($theads as $thead){
-wp125_CheckAdDate($thead['end_date'], $thead['id'], $thead['pre_exp_email']);
 $theslot = $thead['slot'];
 $adguidearray[$theslot] = $thead;
 $arraycount++;
@@ -189,7 +188,6 @@ function wp125_single_ad($theslot) {
 	$adtable_name = $wpdb->prefix . "wp125_ads";
 	$thead = $wpdb->get_row("SELECT * FROM $adtable_name WHERE slot = '$theslot' AND status = '1' ORDER BY id DESC", OBJECT);
 	if ($thead) {
-		wp125_CheckAdDate($thead->end_date, $thead->id, $thead->pre_exp_email);
 		if ($thead->clicks != -1) { $linkurl = get_option('blogurl').'index.php?adclick='.$thead->id; } else { $linkurl = $thead->target; }
 		echo '<a href="'.$linkurl.'" title="'.$adguidearray[$curslot]['name'].'" rel="nofollow"'.ADLINK_EXTRA.'><img src="'.$thead->image_url.'" alt="'.$thead->name.'" /></a>';
 	} else { echo '<a href="'.get_option("wp125_buyad_url").'" rel="nofollow"><img src="'.get_option("wp125_defaultad").'" alt="Your Ad Here" /></a>'; }
