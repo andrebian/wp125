@@ -107,6 +107,7 @@ If you're having a problem with the plugin, try posting on the official WordPres
 * Brasilian Portuguese Translation: José de Menezes Filho
 * German Translation: Simon Kraft
 * Romanian Translation: [Web Hosting Geeks](http://webhostinggeeks.com/)
+* Slovak Translation: Branco Radenovich, [Web Hosting Geeks](http://webhostinggeeks.com/)
 
 
 
