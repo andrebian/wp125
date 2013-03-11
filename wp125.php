@@ -156,7 +156,7 @@ echo '<div class="wp125ad'.$altclass.'"><a href="'.$linkurl.'" title="'.$adguide
 echo "</div>\n";
 }
 if ($setting_ad_orientation=='2c') {
-echo '<div id="wp125adwrap_2c">'."\n";
+echo '<div id="wp125adwrap_2c" class="wp125clearfix">'."\n";
 $arraycount = 0;
 if (!empty($theads)) {
 foreach ($theads as $thead){

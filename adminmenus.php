@@ -251,7 +251,7 @@ jQuery(document).ready(function() {
 </script>
 
 </table>
-<p class="submit"><input type="submit" name="Submit" value="<?php _e('Save Ad', 'wp125'); ?>" /> &nbsp; <?php if ($_GET['editad']!='') { ?><input type="submit" name="deletead" value="<?php _e('Delete Ad', 'wp125'); ?>" /><?php } ?></p>
+<p class="submit"><input type="submit" name="Submit" class="button" value="<?php _e('Save Ad', 'wp125'); ?>" /> &nbsp; <?php if ($_GET['editad']!='') { ?><input type="submit" name="deletead" value="<?php _e('Delete Ad', 'wp125'); ?>" /><?php } ?></p>
 </form>
 <?php wp125_admin_page_footer(); ?>
 </div><?php
@@ -354,7 +354,7 @@ $setting_daysbeforeexp = get_option("wp125_daysbeforeexp");
 
 </table>
 <input name="issubmitted" type="hidden" value="yes" />
-<p class="submit"><input type="submit" name="Submit" value="<?php _e('Save Changes', 'wp125'); ?>" /></p>
+<p class="submit"><input type="submit" class="button" name="Submit" value="<?php _e('Save Changes', 'wp125'); ?>" /></p>
 </form>
 <br/>
 <p><?php _e("Your ads can be displayed using either the included widget, or by using the <strong>&lt;?php wp125_write_ads();  ?&gt;</strong> template tag. Also, you can display a single ad, without any formatting, using <strong>&lt;?php wp125_single_ad(<em>num</em>);  ?&gt;</strong>, where <em>num</em> is the number of the ad slot you wish to show. This is useful for cases where your theme prevents the default formatting from working properly, or where you wish to display your ads in an unforeseen manner.", 'wp125'); ?></p>
