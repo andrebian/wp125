@@ -119,7 +119,7 @@ $editingad = $wpdb->get_row($wpdb->prepare(
 ?><div class="wrap">
 
 <?php
-if ($_POST['Submit']) {
+if ( $_POST['Submit'] && wp_verify_nonce($_POST['nonce_wp125_addedit'],'wp125_addedit') ) {
 $post_editedad = $wpdb->escape($_POST['editedad']);
 $post_adname = $wpdb->escape($_POST['adname']);
 $post_adslot = $wpdb->escape($_POST['adslot']);
@@ -164,6 +164,7 @@ echo '<div id="message" class="updated fade"><p>'.__('Ad deleted.', 'wp125').'</
 <h2><?php _e('Add/Edit Ads', 'wp125'); ?></h2>
 
 <form method="post" action="admin.php?page=wp125_addedit">
+<?php wp_nonce_field('wp125_addedit', 'nonce_wp125_addedit'); ?>
 <table class="form-table">
 
 <?php if ($_GET['editad']!='') { echo '<input name="editedad" type="hidden" value="'.intval($_GET['editad']).'" />'; } ?>
