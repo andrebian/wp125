@@ -1,10 +1,18 @@
 <?php
 
 if (function_exists('wp_enqueue_style')) {
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('thickbox');
-	wp_enqueue_style('thickbox');
-	wp_enqueue_script('media-upload');
+
+	function wp125_queue_admin_page_scripts($hook) {
+		if (strpos($hook, 'wp125_addedit') !== false) {
+			wp_enqueue_script('jquery');
+			wp_enqueue_script('thickbox');
+			wp_enqueue_style('thickbox');
+			wp_enqueue_script('media-upload');
+		}
+	}
+
+	add_action('admin_enqueue_scripts', 'wp125_queue_admin_page_scripts');
+
 }
 
 //Write Manage Menu
